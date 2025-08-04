@@ -1,54 +1,36 @@
-<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>コスメ管理アプリ(MVP)</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('16355_paint.png') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-<body class="font-sans text-text min-h-screen flex flex-col">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <header class="bg-secondary/80 shadow-md">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-primary">
-                <a href="{{ route('cosmetics.index') }}" class="flex items-center">
-                    <img src="{{ asset('16355_paint.png') }}" alt="コスメ管理アイコン" class="h-6 w-6 mr-2 flex-shrink-0">
-                    コスメ管理
-                </a>
-            </h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li>
-                        <a href="{{ route('cosmetics.index') }}"
-                            class="px-3 py-2 rounded-lg transition text-text text-opacity-80
-                      {{ request()->routeIs('cosmetics.index')
-                         ? 'bg-primary/50 font-semibold text-white'
-                         : 'hover:bg-secondary' }}">
-                            一覧
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('cosmetics.create') }}"
-                            class="px-3 py-2 rounded-lg transition text-text text-opacity-80
-                      {{ request()->routeIs('cosmetics.create')
-                         ? 'bg-primary/50 font-semibold text-white'
-                         : 'hover:bg-secondary' }}">
-                            登録
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <!-- Page Content -->
+            <main>
+                @yield('content')
+            </main>
         </div>
-    </header>
-
-    <main class="container mx-auto px-6 py-10 flex-1">
-        @yield('content')
-    </main>
-
-</body>
-
+    </body>
 </html>
