@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function cosmetics()
+    {
+        return $this->hasMany(Cosmetic::class);
+    }
 }
