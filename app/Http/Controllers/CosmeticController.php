@@ -8,10 +8,6 @@ use App\Models\Category;
 
 class CosmeticController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function create()
     {
@@ -37,7 +33,12 @@ class CosmeticController extends Controller
 
     public function index()
     {
-        $cosmetics = auth()->user()->cosmetics()->with('category')->get();
-        return view('cosmetics.index', compact('cosmetics'));
+        try {
+            $cosmetics = auth()->user()->cosmetics()->with('category')->get();
+            return view('cosmetics.index', compact('cosmetics'));
+        } catch (\Exception $e) {
+            logger('Cosmetics index error: ' . $e->getMessage());
+            return response('Server Error: ' . $e->getMessage(), 500);
+        }
     }
 }
