@@ -8,6 +8,7 @@ use App\Models\Category;
 
 class CosmeticController extends Controller
 {
+
     public function create()
     {
         $categories = Category::orderBy('sort_order', 'asc')->get();
@@ -24,6 +25,7 @@ class CosmeticController extends Controller
             'emoji'=> 'nullable|string|max:4',
         ]);
 
+        $validated['user_id'] = auth()->id();
         Cosmetic::create($validated);
 
         return redirect()->route('cosmetics.create')->with('success', 'コスメを登録しました');
@@ -31,7 +33,12 @@ class CosmeticController extends Controller
 
     public function index()
     {
-        $cosmetics = Cosmetic::with('category')->get();
-        return view('cosmetics.index', compact('cosmetics'));
+        try {
+            $cosmetics = auth()->user()->cosmetics()->with('category')->get();
+            return view('cosmetics.index', compact('cosmetics'));
+        } catch (\Exception $e) {
+            logger('Cosmetics index error: ' . $e->getMessage());
+            return response('Server Error: ' . $e->getMessage(), 500);
+        }
     }
 }
