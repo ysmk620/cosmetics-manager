@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cosmetics', [CosmeticController::class, 'index'])->name('cosmetics.index');
     Route::get('/cosmetics/create', [CosmeticController::class, 'create'])->name('cosmetics.create');
     Route::post('/cosmetics', [CosmeticController::class, 'store'])->name('cosmetics.store');
+    Route::get('/cosmetics/{cosmetic}', [CosmeticController::class, 'show'])->name('cosmetics.show');
 });
 
 require __DIR__.'/auth.php';
