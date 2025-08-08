@@ -41,4 +41,15 @@ class CosmeticController extends Controller
             return response('Server Error: ' . $e->getMessage(), 500);
         }
     }
+
+    public function show(Cosmetic $cosmetic)
+    {
+        if ($cosmetic->user_id !== auth()->id()) {
+            abort(403, 'このコスメにアクセスする権限がありません。');
+        }
+
+        $cosmetic->load('category');
+        return view('cosmetics.show', compact('cosmetic'));
+    }
+
 }
