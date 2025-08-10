@@ -15,7 +15,7 @@
             <thead class="bg-secondary/80">
                 <tr>
                     <th class="px-6 py-3 text-left text-sm font-medium text-text text-opacity-80">  </th>
-                    <th class="px-6 py-3 text-left text-sm font-medium text-text text-opacity-80">商品名</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-text text-opacity-80">アイテム名</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-text text-opacity-80 w-36">ブランド</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-text text-opacity-80 w-36">カテゴリ</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-text text-opacity-80 w-36">使用期限</th>
@@ -28,7 +28,7 @@
                 && $cosmetic->expiration_date < now()->toDateString();
                     @endphp
 
-                    <tr class="transition {{ $isExpired? 'bg-red-100 hover:bg-red-200': 'hover:bg-secondary/30' }}">
+                    <tr class="transition cursor-pointer {{ $isExpired? 'bg-red-100 hover:bg-red-200': 'hover:bg-secondary/30' }}" onclick="window.location='{{ route('cosmetics.show', $cosmetic) }}'">
                         <td class="px-6 py-4 whitespace-nowrap text-center text-2xl">
                         @if ($cosmetic->emoji)
                         {{ $cosmetic->emoji }}
