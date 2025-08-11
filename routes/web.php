@@ -20,11 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
     Route::get('/cosmetics', [CosmeticController::class, 'index'])->name('cosmetics.index');
     Route::get('/cosmetics/create', [CosmeticController::class, 'create'])->name('cosmetics.create');
     Route::post('/cosmetics', [CosmeticController::class, 'store'])->name('cosmetics.store');
     Route::get('/cosmetics/{cosmetic}', [CosmeticController::class, 'show'])->name('cosmetics.show');
+    Route::delete(('/cosmetics/{cosmetic}'), [CosmeticController::class, 'destroy'])->name('cosmetics.destroy');
 });
 
 require __DIR__.'/auth.php';

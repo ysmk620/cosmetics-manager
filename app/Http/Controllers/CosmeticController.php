@@ -28,7 +28,7 @@ class CosmeticController extends Controller
         $validated['user_id'] = auth()->id();
         Cosmetic::create($validated);
 
-        return redirect()->route('cosmetics.create')->with('success', 'コスメを登録しました');
+        return redirect()->route('cosmetics.create')->with('success', 'アイテムを登録しました');
     }
 
     public function index()
@@ -45,11 +45,20 @@ class CosmeticController extends Controller
     public function show(Cosmetic $cosmetic)
     {
         if ($cosmetic->user_id !== auth()->id()) {
-            abort(403, 'このコスメにアクセスする権限がありません。');
+            abort(403, 'このアイテムにアクセスする権限がありません。');
         }
 
         $cosmetic->load('category');
         return view('cosmetics.show', compact('cosmetic'));
     }
 
+    public function destroy(Cosmetic $cosmetic)
+    {
+        if ($cosmetic->user_id !== auth()->id()) {
+            abort(403, 'このアイテムを削除する権限がありません。');
+        }
+
+        $cosmetic->delete();
+        return redirect()->route('cosmetics.index')->with('success', 'アイテムを削除しました');
+    }
 }
