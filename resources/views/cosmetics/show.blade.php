@@ -72,21 +72,20 @@
             <div class="mt-6 p-4 bg-gray-50 rounded-lg">
                 <div class="text-sm text-gray-600">
                     @php
-                    $expirationDate = \Carbon\Carbon::parse($cosmetic->expiration_date);
-                    $daysUntilExpiration = now()->diffInDays($expirationDate, false);
+                    $expirationDate = \Carbon\Carbon::parse($cosmetic->expiration_date)->startOfDay();
+                    $daysUntilExpiration = now()->startOfDay()->diffInDays($expirationDate, false);
                     @endphp
-                    
                     @if($isExpired)
                     <span class="text-red-600 font-medium">
-                        使用期限を{{ abs($daysUntilExpiration) }}日過ぎています
+                        使用期限を{{ abs(floor($daysUntilExpiration)) }}日過ぎています
                     </span>
                     @elseif($daysUntilExpiration <= 30)
                     <span class="text-orange-600 font-medium">
-                        使用期限まで残り{{ $daysUntilExpiration }}日です
+                        使用期限まで残り{{ floor($daysUntilExpiration) }}日です
                     </span>
                     @else
                     <span class="text-green-600">
-                        使用期限まで{{ $daysUntilExpiration }}日あります
+                        使用期限まで{{ floor($daysUntilExpiration) }}日あります
                     </span>
                     @endif
                 </div>
