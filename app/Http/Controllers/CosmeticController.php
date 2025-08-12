@@ -61,4 +61,31 @@ class CosmeticController extends Controller
         $cosmetic->delete();
         return redirect()->route('cosmetics.index')->with('success', 'アイテムを削除しました');
     }
+
+    public function edit(Cosmetic $cosmetic){
+        if ($cosmetic->user_id !== auth()->id()) {
+            abort(403, 'このアイテムを編集する権限がありません。');
+        }
+
+        $categories = Category::orderBy('sort_order', 'asc')->get();
+        return view('cosmetics.edit', compact('cosmetic', 'categories'));
+    }
+
+    public function update(Request $request, Cosmetic $cosmetic){
+        if ($cosmetic->user_id !== auth()->id()) {
+            abort(403, 'このアイテムを更新する権限がありません。');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'brand' => 'nullable|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'expiration_date' => 'nullable|date',
+            'emoji'=> 'nullable|string|max:4',
+        ]);
+
+        $cosmetic->update($validated);
+
+        return redirect()->route('cosmetics.index')->with('success', 'アイテムを更新しました');
+    }
 }
