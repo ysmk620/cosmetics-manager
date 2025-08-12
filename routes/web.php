@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/cosmetics', [CosmeticController::class, 'store'])->name('cosmetics.store');
     Route::get('/cosmetics/{cosmetic}', [CosmeticController::class, 'show'])->name('cosmetics.show');
     Route::delete(('/cosmetics/{cosmetic}'), [CosmeticController::class, 'destroy'])->name('cosmetics.destroy');
+    Route::get('/cosmetics/{cosmetic}/edit', [CosmeticController::class, 'edit'])->name('cosmetics.edit');
+    Route::patch('/cosmetics/{cosmetic}', [CosmeticController::class, 'update'])->name('cosmetics.update');
 });
 
 require __DIR__.'/auth.php';
