@@ -42,15 +42,23 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
                         </div>
-                        <div class="mt-4 space-y-2 max-h-48 overflow-y-auto">
-                            @forelse($categoryCounts as $categoryId => $data)
-                                <div class="flex justify-between items-center py-2 border-b border-gray-100">
-                                    <span class="text-sm text-gray-700">{{ $data['name'] }}</span>
-                                    <span class="text-sm font-medium text-gray-900">{{ $data['count'] }}点</span>
+                        <div class="mt-4">
+                            @if($categoryCounts->count() > 0)
+                                <div class="flex justify-center mt-3" style="width: 400px; height: 320px; margin: 0 auto;">
+                                    <canvas id="catChart"></canvas>
                                 </div>
-                            @empty
+                                <!-- データ一覧 -->
+                                <div class="space-y-2 max-h-32 overflow-y-auto mt-4">
+                                    @foreach($categoryCounts as $categoryId => $data)
+                                        <div class="flex justify-between items-center py-1 border-b border-gray-100">
+                                            <span class="text-xs text-gray-700">{{ $data['name'] }}</span>
+                                            <span class="text-xs font-medium text-gray-900">{{ $data['count'] }}点</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
                                 <p class="text-sm text-gray-500">まだアイテムが登録されていません</p>
-                            @endforelse
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -112,3 +120,16 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const cat = @json($categoryCounts->values());
+  const ctx = document.getElementById('catChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels: cat.map(c=>c.name), datasets: [{ data: cat.map(c=>c.count) }] },
+    options: { plugins:{ legend:{ position:'bottom'} }, cutout:'60%' }
+  });
+</script>
+@endpush
