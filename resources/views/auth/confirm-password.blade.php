@@ -1,27 +1,20 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+  <div class="w-full max-w-md mx-auto mt-16 md:mt-24">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold" style="color: var(--color-text)">CosMemo</h1>
+      <p class="mt-2 text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">パスワード確認</p>
     </div>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
+    <div class="bg-[color:var(--color-surface)]/80 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 md:p-8">
+      <p class="text-sm mb-4" style="color: color-mix(in oklab, var(--color-text) 80%, transparent)">続行するにはパスワードの確認が必要です。</p>
+
+      <form method="POST" action="{{ route('password.confirm') }}" class="space-y-4">
         @csrf
 
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
+        <x-ui.input label="パスワード" name="password" type="password" required autocomplete="current-password" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
+        <x-ui.button variant="primary" type="submit" class="w-full">確認する</x-ui.button>
+      </form>
+    </div>
+  </div>
 </x-guest-layout>
