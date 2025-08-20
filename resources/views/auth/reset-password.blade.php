@@ -1,39 +1,23 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
+  <div class="w-full max-w-md mx-auto mt-16 md:mt-24">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold" style="color: var(--color-text)">CosMemo</h1>
+      <p class="mt-2 text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">パスワード再設定</p>
+    </div>
+
+    <div class="bg-[color:var(--color-surface)]/80 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 md:p-8">
+      <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
         @csrf
 
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <x-ui.input label="メールアドレス" name="email" type="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+        <x-ui.input label="新しいパスワード" name="password" type="password" required autocomplete="new-password" />
+        <x-ui.input label="新しいパスワード（確認）" name="password_confirmation" type="password" required autocomplete="new-password" />
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
+        <x-ui.button variant="primary" type="submit" class="w-full">パスワードを更新</x-ui.button>
+      </form>
+    </div>
+  </div>
 </x-guest-layout>

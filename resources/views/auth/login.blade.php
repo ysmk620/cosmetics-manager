@@ -1,47 +1,39 @@
 <x-guest-layout>
+  <div class="w-full max-w-md mx-auto mt-16 md:mt-24">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold" style="color: var(--color-text)">CosMemo</h1>
+      <p class="mt-2 text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">ログイン</p>
+    </div>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <div class="bg-[color:var(--color-surface)]/80 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 md:p-8">
+      <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <x-ui.input label="メールアドレス" name="email" type="email" required autofocus autocomplete="username" />
+        <x-ui.input label="パスワード" name="password" type="password" required autocomplete="current-password" />
+
+        <div class="flex items-center justify-between">
+          <label for="remember_me" class="inline-flex items-center gap-2" style="color: color-mix(in oklab, var(--color-text) 80%, transparent)">
+            <input id="remember_me" type="checkbox" name="remember" class="rounded border-[color:var(--color-line)]" />
+            <span class="text-sm">ログイン状態を保持</span>
+          </label>
+          @if (Route::has('password.request'))
+            <a href="{{ route('password.request') }}" class="underline text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">パスワードをお忘れですか？</a>
+          @endif
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <x-ui.button variant="primary" type="submit" class="w-full">ログイン</x-ui.button>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+        <p class="text-center text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">
+          アカウント未作成の方は
+          @if (Route::has('register'))
+            <a href="{{ route('register') }}" class="underline">新規登録</a>
+          @endif
+        </p>
+      </form>
+    </div>
+  </div>
 </x-guest-layout>

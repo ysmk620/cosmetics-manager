@@ -1,52 +1,26 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+  <div class="w-full max-w-lg mx-auto mt-16 md:mt-24">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold" style="color: var(--color-text)">CosMemo</h1>
+      <p class="mt-2 text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">新規登録</p>
+    </div>
+
+    <div class="bg-[color:var(--color-surface)]/80 backdrop-blur-md border border-white/30 shadow-xl rounded-2xl p-6 md:p-8">
+      <form method="POST" action="{{ route('register') }}" class="space-y-4">
         @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+        <x-ui.input label="お名前" name="name" type="text" required autofocus autocomplete="name" />
+        <x-ui.input label="メールアドレス" name="email" type="email" required autocomplete="username" />
+        <x-ui.input label="パスワード" name="password" type="password" required autocomplete="new-password" />
+        <x-ui.input label="パスワード（確認）" name="password_confirmation" type="password" required autocomplete="new-password" />
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <x-ui.button variant="primary" type="submit" class="w-full">登録する</x-ui.button>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
+        <p class="text-center text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">
+          すでに登録済みの方は
+          <a href="{{ route('login') }}" class="underline">ログイン</a>
+        </p>
+      </form>
+    </div>
+  </div>
 </x-guest-layout>
