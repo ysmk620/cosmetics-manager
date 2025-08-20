@@ -57,7 +57,8 @@ body {
         @apply max-w-6xl mx-auto px-6;
     }
     .card {
-        @apply bg-white/90 rounded-2xl border shadow-lg;
+        @apply rounded-2xl border shadow-lg;
+        background: var(--color-surface);
         border-color: var(--color-line);
     }
     .form-label {
