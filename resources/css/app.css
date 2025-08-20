@@ -27,6 +27,7 @@
     body {
         background-color: var(--bg-app);
     }
+    [x-cloak] { display: none !important; }
 }
 
 @plugin '@tailwindcss/typography';
