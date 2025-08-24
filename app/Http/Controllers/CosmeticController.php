@@ -22,7 +22,7 @@ class CosmeticController extends Controller
             'brand' => 'nullable|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'expiration_date' => 'nullable|date',
-            'emoji'=> 'nullable|string|max:4',
+            'emoji' => 'nullable|string|max:4',
         ]);
 
         $validated['user_id'] = auth()->id();
@@ -31,11 +31,33 @@ class CosmeticController extends Controller
         return redirect()->route('cosmetics.create')->with('success', 'アイテムを登録しました');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $cosmetics = auth()->user()->cosmetics()->with('category')->get();
-            return view('cosmetics.index', compact('cosmetics'));
+            $query = auth()->user()->cosmetics()->with('category');
+
+            // キーワード検索（名前/ブランド）
+            $keyword = trim((string) $request->input('q'));
+            if ($keyword !== '') {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('name', 'ILIKE', "%{$keyword}%")
+                        ->orWhere('brand', 'ILIKE', "%{$keyword}%");
+                });
+            }
+
+            // カテゴリ絞り込み
+            $categoryId = $request->input('category_id');
+            if (!empty($categoryId)) {
+                $query->where('category_id', $categoryId);
+            }
+
+            //プルダウン用
+            $categories = Category::orderBy('sort_order', 'asc')->get();
+
+            // ページネーション（クエリ文字列を保持）
+            $cosmetics = $query->orderBy('id', 'desc')->paginate(15)->withQueryString();
+
+            return view('cosmetics.index', compact('cosmetics', 'categories'));
         } catch (\Exception $e) {
             logger('Cosmetics index error: ' . $e->getMessage());
             return response('Server Error: ' . $e->getMessage(), 500);
@@ -62,7 +84,8 @@ class CosmeticController extends Controller
         return redirect()->route('cosmetics.index')->with('success', 'アイテムを削除しました');
     }
 
-    public function edit(Cosmetic $cosmetic){
+    public function edit(Cosmetic $cosmetic)
+    {
         if ($cosmetic->user_id !== auth()->id()) {
             abort(403, 'このアイテムを編集する権限がありません。');
         }
@@ -71,7 +94,8 @@ class CosmeticController extends Controller
         return view('cosmetics.edit', compact('cosmetic', 'categories'));
     }
 
-    public function update(Request $request, Cosmetic $cosmetic){
+    public function update(Request $request, Cosmetic $cosmetic)
+    {
         if ($cosmetic->user_id !== auth()->id()) {
             abort(403, 'このアイテムを更新する権限がありません。');
         }
@@ -81,7 +105,7 @@ class CosmeticController extends Controller
             'brand' => 'nullable|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'expiration_date' => 'nullable|date',
-            'emoji'=> 'nullable|string|max:4',
+            'emoji' => 'nullable|string|max:4',
         ]);
 
         $cosmetic->update($validated);
