@@ -10,6 +10,31 @@
     </div>
     @endif
 
+    {{-- フィルタフォーム --}}
+    <form action="{{ route('cosmetics.index') }}" method="GET" class="card p-4 grid gap-3 md:grid-cols-3" style="color: var(--color-text)">
+        <div class="md:col-span-1">
+            <label for="q" class="form-label">キーワード（名前/ブランド）</label>
+            <input id="q" name="q" type="text" value="{{ request('q') }}" placeholder="例: リップ or CHANEL" class="form-input" />
+        </div>
+        <div class="md:col-span-1">
+            <label for="category_id" class="form-label">カテゴリ</label>
+            <select id="category_id" name="category_id" class="form-input">
+                <option value="">すべて</option>
+                @isset($categories)
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" @selected(request('category_id') == $category->id)>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                @endisset
+            </select>
+        </div>
+        <div class="flex items-end gap-2 md:col-span-1">
+            <x-ui.button type="submit" variant="primary">検索</x-ui.button>
+            <a href="{{ route('cosmetics.index') }}" class="px-4 py-2 rounded-md border border-gray-300" style="color: var(--color-text)">クリア</a>
+        </div>
+    </form>
+
     <div class="overflow-x-auto card">
         <table class="min-w-full table-auto" style="color: var(--color-text)">
             <thead class="bg-[color:var(--color-secondary)]">
@@ -22,7 +47,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-                @foreach ($cosmetics as $cosmetic)
+                @forelse ($cosmetics as $cosmetic)
                 @php
                 $isExpired = $cosmetic->expiration_date
                 && $cosmetic->expiration_date < now()->toDateString();
@@ -43,9 +68,20 @@
                             {{ $cosmetic->expiration_date }}
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                            条件に一致するアイテムがありません。
+                        </td>
+                    </tr>
+                    @endforelse
             </tbody>
         </table>
+    </div>
+
+    {{-- ページネーション --}}
+    <div class="mt-4" style="color: var(--color-text)">
+        {{ $cosmetics->links() }}
     </div>
 </div>
 @endsection
