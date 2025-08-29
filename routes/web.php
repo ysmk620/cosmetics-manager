@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete(('/cosmetics/{cosmetic}'), [CosmeticController::class, 'destroy'])->name('cosmetics.destroy');
     Route::get('/cosmetics/{cosmetic}/edit', [CosmeticController::class, 'edit'])->name('cosmetics.edit');
     Route::patch('/cosmetics/{cosmetic}', [CosmeticController::class, 'update'])->name('cosmetics.update');
+    Route::patch('/cosmetics/{cosmetic}/favorite', [CosmeticController::class, 'toggleFavorite'])->name('cosmetics.favorite');
 });
 
 require __DIR__.'/auth.php';
