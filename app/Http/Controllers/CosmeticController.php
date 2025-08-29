@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cosmetic;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class CosmeticController extends Controller
 {
@@ -46,18 +47,34 @@ class CosmeticController extends Controller
             }
 
             // カテゴリ絞り込み
-            $categoryId = $request->input('category_id');
-            if (!empty($categoryId)) {
+            if ($categoryId = $request->input('category_id')) {
                 $query->where('category_id', $categoryId);
+            }
+
+            // お気に入り絞り込み
+            $favoritesOnly = $request->boolean('favorites');
+            if ($favoritesOnly) {
+                $query->whereExists(function ($q) {
+                    $q->selectRaw('1')
+                        ->from('favorites as f')
+                        ->whereColumn('f.cosmetic_id', 'cosmetics.id')
+                        ->where('f.user_id', auth()->id());
+                });
             }
 
             //プルダウン用
             $categories = Category::orderBy('sort_order', 'asc')->get();
 
-            // ページネーション（クエリ文字列を保持）
+            // ページネーション
             $cosmetics = $query->orderBy('id', 'desc')->paginate(15)->withQueryString();
 
-            return view('cosmetics.index', compact('cosmetics', 'categories'));
+            // 画面で♡状態を即判定できるよう ID 配列を渡す
+            $favoritedIds = DB::table('favorites')
+                ->where('user_id', auth()->id())
+                ->pluck('cosmetic_id')
+                ->toArray();
+
+            return view('cosmetics.index', compact('cosmetics', 'categories', 'favoritesOnly', 'favoritedIds'));
         } catch (\Exception $e) {
             logger('Cosmetics index error: ' . $e->getMessage());
             return response('Server Error: ' . $e->getMessage(), 500);
@@ -111,5 +128,21 @@ class CosmeticController extends Controller
         $cosmetic->update($validated);
 
         return redirect()->route('cosmetics.index')->with('success', 'アイテムを更新しました');
+    }
+
+    public function toggleFavorite(Cosmetic $cosmetic)
+    {
+        abort_if($cosmetic->user_id !== auth()->id(), 403);
+
+        $relation = auth()->user()->favoriteCosmetics();
+
+        $result = $relation->toggle($cosmetic->id);
+        $isFavorite = !empty($result['attached']);
+
+        if (request()->wantsJson()) {
+            return response()->json(['ok' => true, 'is_favorite' => $isFavorite]);
+        }
+
+        return back()->with('success', 'お気に入りを更新しました');
     }
 }

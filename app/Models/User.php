@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -49,5 +50,10 @@ class User extends Authenticatable
     public function cosmetics()
     {
         return $this->hasMany(Cosmetic::class);
+    }
+
+    public function favoriteCosmetics()
+    {
+        return $this->belongsToMany(\App\Models\Cosmetic::class, 'favorites')->withTimestamps();
     }
 }
