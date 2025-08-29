@@ -24,4 +24,9 @@ class Cosmetic extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function favoredBy()
+    {
+        return $this->belongsToMany(\App\Models\User::class, 'favorites')->withTimestamps();
+    }
 }
