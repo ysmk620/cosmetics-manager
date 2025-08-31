@@ -21,8 +21,10 @@ class CosmeticController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'brand' => 'nullable|string|max:255',
+            'color_product_code' => 'nullable|string|max:50',
             'category_id' => 'required|exists:categories,id',
             'expiration_date' => 'nullable|date',
+            'memo' => 'nullable|string|max:120',
             'emoji' => 'nullable|string|max:4',
         ]);
 
@@ -120,8 +122,10 @@ class CosmeticController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'brand' => 'nullable|string|max:255',
+            'color_product_code' => 'nullable|string|max:50',
             'category_id' => 'required|exists:categories,id',
             'expiration_date' => 'nullable|date',
+            'memo' => 'nullable|string|max:120',
             'emoji' => 'nullable|string|max:4',
         ]);
 
