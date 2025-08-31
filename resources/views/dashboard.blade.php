@@ -91,14 +91,14 @@
         </div>
 
         <!-- アイテム追加CTAカード -->
-        <div class="card p-6 text-center" style="background: var(--color-subtle); color: var(--color-surface)">
-            <svg class="w-12 h-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="{{ route('cosmetics.create') }}" class="card p-6 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4"
+            style="background: var(--color-subtle); color: var(--color-surface)">
+            <svg class="w-12 h-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
             </svg>
             <h3 class="text-lg font-semibold mb-2">新しいアイテムを追加</h3>
-            <p class="opacity-90 text-sm mb-4">お気に入りのコスメアイテムを登録しましょう</p>
-            <x-ui.button as="a" href="{{ route('cosmetics.create') }}" variant="secondary">アイテムを追加する</x-ui.button>
-        </div>
+            <p class="opacity-90 text-sm">お気に入りのコスメアイテムを登録しましょう</p>
+        </a>
     </div>
 </div>
 @endsection
