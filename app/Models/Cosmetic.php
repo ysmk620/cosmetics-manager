@@ -9,8 +9,10 @@ class Cosmetic extends Model
     protected $fillable = [
         'name',
         'brand',
+        'color_product_code',
         'category_id',
         'expiration_date',
+        'memo',
         'emoji',
         'user_id',
     ];
