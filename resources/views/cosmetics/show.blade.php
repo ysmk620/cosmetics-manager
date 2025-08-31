@@ -24,6 +24,7 @@
         @endif
 
         <div class="space-y-6">
+            {{-- 絵文字 --}}
             <div class="text-center">
                 @if ($cosmetic->emoji)
                 <div class="text-8xl mb-4">{{ $cosmetic->emoji }}</div>
@@ -32,60 +33,74 @@
                 @endif
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-4">
-                    <div>
-                        <label class="form-label">アイテム名</label>
-                        <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
-                            <span class="text-lg">{{ $cosmetic->name }}</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="form-label">ブランド</label>
-                        <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
-                            <span class="text-lg">{{ $cosmetic->brand ?: '未設定' }}</span>
-                        </div>
-                    </div>
+            {{-- アイテム名 --}}
+            <div>
+                <label class="form-label">アイテム名</label>
+                <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
+                    <span class="text-lg">{{ $cosmetic->name }}</span>
                 </div>
+            </div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label class="form-label">カテゴリ</label>
-                        <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
-                            <span class="text-lg">{{ $cosmetic->category->name ?? '未設定' }}</span>
-                        </div>
-                    </div>
+            {{-- カラー・品番 --}}
+            <div>
+                <label class="form-label">カラー・品番</label>
+                <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
+                    <span class="text-lg">{{ $cosmetic->color_product_code ?: '未設定' }}</span>
+                </div>
+            </div>
 
-                    <div>
-                        <label class="form-label">使用期限</label>
-                        <div class="p-4 rounded-lg border {{ $isExpired ? 'border-red-300 bg-red-50' : '' }}" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
-                            <span class="text-lg {{ $isExpired ? 'text-red-600 font-semibold' : '' }}">
-                                {{ $cosmetic->expiration_date ?: '未設定' }}
-                            </span>
-                        </div>
-                        @if($cosmetic->expiration_date)
-                            <div class="mt-2 text-lg text-center">
-                                @php
-                                $expirationDate = \Carbon\Carbon::parse($cosmetic->expiration_date)->startOfDay();
-                                $daysUntilExpiration = now()->startOfDay()->diffInDays($expirationDate, false);
-                                @endphp
-                                @if($isExpired)
-                                <span class="text-red-600 font-medium">
-                                    使用期限を{{ abs(floor($daysUntilExpiration)) }}日過ぎています
-                                </span>
-                                @elseif($daysUntilExpiration <= 30)
-                                <span class="text-orange-600 font-medium">
-                                    使用期限まで残り{{ floor($daysUntilExpiration) }}日です
-                                </span>
-                                @else
-                                <span class="text-green-600">
-                                    使用期限まで{{ floor($daysUntilExpiration) }}日あります
-                                </span>
-                                @endif
-                            </div>
+            {{-- ブランド --}}
+            <div>
+                <label class="form-label">ブランド</label>
+                <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
+                    <span class="text-lg">{{ $cosmetic->brand ?: '未設定' }}</span>
+                </div>
+            </div>
+
+            {{-- カテゴリ --}}
+            <div>
+                <label class="form-label">カテゴリ</label>
+                <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
+                    <span class="text-lg">{{ $cosmetic->category->name ?? '未設定' }}</span>
+                </div>
+            </div>
+
+            {{-- 使用期限 --}}
+            <div>
+                <label class="form-label">使用期限</label>
+                <div class="p-4 rounded-lg border {{ $isExpired ? 'border-red-300 bg-red-50' : '' }}" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
+                    <span class="text-lg {{ $isExpired ? 'text-red-600 font-semibold' : '' }}">
+                        {{ $cosmetic->expiration_date ?: '未設定' }}
+                    </span>
+                </div>
+                @if($cosmetic->expiration_date)
+                    <div class="mt-2 text-lg text-center">
+                        @php
+                        $expirationDate = \Carbon\Carbon::parse($cosmetic->expiration_date)->startOfDay();
+                        $daysUntilExpiration = now()->startOfDay()->diffInDays($expirationDate, false);
+                        @endphp
+                        @if($isExpired)
+                        <span class="text-red-600 font-medium">
+                            使用期限を{{ abs(floor($daysUntilExpiration)) }}日過ぎています
+                        </span>
+                        @elseif($daysUntilExpiration <= 30)
+                        <span class="text-orange-600 font-medium">
+                            使用期限まで残り{{ floor($daysUntilExpiration) }}日です
+                        </span>
+                        @else
+                        <span class="text-green-600">
+                            使用期限まで{{ floor($daysUntilExpiration) }}日あります
+                        </span>
                         @endif
                     </div>
+                @endif
+            </div>
+
+            {{-- メモ --}}
+            <div>
+                <label class="form-label">メモ</label>
+                <div class="p-4 rounded-lg border" style="background-color: color-mix(in oklab, white 80%, transparent); border-color: var(--color-line);">
+                    <span class="text-lg">{{ $cosmetic->memo ?: '未設定' }}</span>
                 </div>
             </div>
         </div>

@@ -36,8 +36,17 @@
       @enderror
     </div>
 
-    {{-- 商品名 --}}
-    <x-ui.input label="商品名" name="name" required />
+    {{-- アイテム（商品名） --}}
+    <x-ui.input label="アイテム名" name="name" required />
+
+    {{-- カラー・品番（統合） --}}
+    <div>
+      <label class="form-label">カラー・品番</label>
+      <input type="text" name="color_product_code" value="{{ old('color_product_code') }}" class="form-input" maxlength="50" placeholder="例: ピンクベージュ / #02">
+      @error('color_product_code')
+      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
+      @enderror
+    </div>
 
     {{-- ブランド --}}
     <x-ui.input label="ブランド" name="brand" />
@@ -58,6 +67,15 @@
 
     {{-- 使用期限 --}}
     <x-ui.input label="使用期限" name="expiration_date" type="date" />
+
+    {{-- メモ --}}
+    <div>
+      <label class="form-label">メモ</label>
+      <textarea name="memo" rows="3" class="form-input" maxlength="120" placeholder="メモ（最大120文字）">{{ old('memo') }}</textarea>
+      @error('memo')
+      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
+      @enderror
+    </div>
 
 
 

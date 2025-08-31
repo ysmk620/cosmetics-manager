@@ -38,11 +38,20 @@
       @enderror
     </div>
 
-    {{-- 商品名 --}}
+    {{-- アイテム（商品名） --}}
     <div>
-      <label class="form-label">商品名</label>
+      <label class="form-label">アイテム名</label>
       <input type="text" name="name" required value="{{ old('name', $cosmetic->name) }}" class="form-input">
       @error('name')
+      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
+      @enderror
+    </div>
+
+    {{-- カラー・品番（統合） --}}
+    <div>
+      <label class="form-label">カラー・品番</label>
+      <input type="text" name="color_product_code" value="{{ old('color_product_code', $cosmetic->color_product_code ?: (trim(collect([$cosmetic->color, $cosmetic->product_code])->filter()->implode(' / ')) ?: '')) }}" class="form-input" maxlength="50" placeholder="例: ピンクベージュ / #02">
+      @error('color_product_code')
       <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
       @enderror
     </div>
@@ -75,6 +84,15 @@
       <label class="form-label">使用期限</label>
       <input type="date" name="expiration_date" value="{{ old('expiration_date', $cosmetic->expiration_date) }}" class="form-input">
       @error('expiration_date')
+      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
+      @enderror
+    </div>
+
+    {{-- メモ --}}
+    <div>
+      <label class="form-label">メモ</label>
+      <textarea name="memo" rows="3" class="form-input" maxlength="120" placeholder="メモ（最大120文字）">{{ old('memo', $cosmetic->memo) }}</textarea>
+      @error('memo')
       <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
       @enderror
     </div>
