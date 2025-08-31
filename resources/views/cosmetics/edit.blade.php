@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="max-w-md mx-auto space-y-6">
-  <h2 class="text-3xl font-bold text-center text-primary">アイテム編集</h2>
+  <h2 class="text-3xl font-bold text-center" style="color: var(--color-text)">アイテム編集</h2>
 
   @if(session('success'))
-  <div class="p-4 bg-primary/30 text-text rounded-lg shadow">
+  <div class="p-4 card" style="color: var(--color-text)">
     {{ session('success') }}
   </div>
   @endif
 
   <form action="{{ route('cosmetics.update', $cosmetic) }}" method="POST"
-    class="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-lg space-y-5">
+    class="card p-6 space-y-5" style="color: var(--color-text)">
     @csrf
     @method('patch')
 
@@ -26,10 +26,8 @@
     @endphp
 
     <div>
-      <label for="emoji" class="block mb-1 font-medium text-text text-opacity-80">イメージ</label>
-      <select name="emoji" id="emoji"
-        class="w-full border border-primary rounded-lg px-4 py-2
-                       focus:outline-none focus:ring-2 focus:ring-primary/50">
+      <label for="emoji" class="form-label">イメージ</label>
+      <select name="emoji" id="emoji" class="form-input">
         <option value="">選択してください</option>
         @foreach ($emojiOptions as $emoji)
         <option value="{{ $emoji }}" {{ (old('emoji', $cosmetic->emoji) == $emoji) ? 'selected' : '' }}>{{ $emoji }}</option>
@@ -42,10 +40,8 @@
 
     {{-- 商品名 --}}
     <div>
-      <label class="block mb-1 font-medium text-text text-opacity-80">商品名</label>
-      <input type="text" name="name" required value="{{ old('name', $cosmetic->name) }}"
-        class="w-full border border-primary rounded-lg px-4 py-2
-                      focus:outline-none focus:ring-2 focus:ring-primary/50">
+      <label class="form-label">商品名</label>
+      <input type="text" name="name" required value="{{ old('name', $cosmetic->name) }}" class="form-input">
       @error('name')
       <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
       @enderror
@@ -53,10 +49,8 @@
 
     {{-- ブランド --}}
     <div>
-      <label class="block mb-1 font-medium text-text text-opacity-80">ブランド</label>
-      <input type="text" name="brand" value="{{ old('brand', $cosmetic->brand) }}"
-        class="w-full border border-primary rounded-lg px-4 py-2
-                      focus:outline-none focus:ring-2 focus:ring-primary/50">
+      <label class="form-label">ブランド</label>
+      <input type="text" name="brand" value="{{ old('brand', $cosmetic->brand) }}" class="form-input">
       @error('brand')
       <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
       @enderror
@@ -64,10 +58,8 @@
 
     {{-- カテゴリ --}}
     <div>
-      <label class="block mb-1 font-medium text-text text-opacity-80">カテゴリ</label>
-      <select name="category_id"
-        class="w-full border border-primary rounded-lg px-4 py-2
-                       focus:outline-none focus:ring-2 focus:ring-primary/50">
+      <label class="form-label">カテゴリ</label>
+      <select name="category_id" class="form-input">
         <option value="">選択してください</option>
         @foreach($categories as $category)
         <option value="{{ $category->id }}" {{ (old('category_id', $cosmetic->category_id) == $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -80,10 +72,8 @@
 
     {{-- 使用期限 --}}
     <div>
-      <label class="block mb-1 font-medium text-text text-opacity-80">使用期限</label>
-      <input type="date" name="expiration_date" value="{{ old('expiration_date', $cosmetic->expiration_date) }}"
-        class="w-full border border-primary rounded-lg px-4 py-2
-                      focus:outline-none focus:ring-2 focus:ring-primary/50">
+      <label class="form-label">使用期限</label>
+      <input type="date" name="expiration_date" value="{{ old('expiration_date', $cosmetic->expiration_date) }}" class="form-input">
       @error('expiration_date')
       <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
       @enderror
@@ -93,8 +83,7 @@
 
     {{-- 送信ボタン --}}
     <button type="submit"
-      class="w-full text-white font-semibold px-6 py-3 rounded-lg
-                     bg-primary hover:bg-secondary transition">
+      class="btn btn-primary w-full px-6 py-3">
       更新する
     </button>
   </form>
