@@ -10,9 +10,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        \Log::info('DashboardController@index called');
         $user = auth()->user();
         $totalCount = $user->cosmetics()->count();
+        $favoritesCount = $user->favoriteCosmetics()->count();
+        $expiredCount = $user->cosmetics()
+            ->whereNotNull('expiration_date')
+            ->where('expiration_date', '<', now()->toDateString())
+            ->count();
         $categoryCounts = $user->cosmetics()
             ->with('category')
             ->get()
@@ -38,7 +42,6 @@ class DashboardController extends Controller
                 return $item;
             });
 
-        \Log::info('Dashboard data prepared', compact('totalCount', 'categoryCounts', 'expiringItems'));
-        return view('dashboard', compact('totalCount', 'categoryCounts', 'expiringItems'));
+        return view('dashboard', compact('totalCount', 'favoritesCount', 'expiredCount', 'categoryCounts', 'expiringItems'));
     }
 }
