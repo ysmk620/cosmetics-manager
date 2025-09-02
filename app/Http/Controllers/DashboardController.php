@@ -38,7 +38,8 @@ class DashboardController extends Controller
             ->limit(3)
             ->get()
             ->map(function ($item) {
-                $item->days_until_expiry = Carbon::parse($item->expiration_date)->diffInDays(Carbon::today());
+                $days = Carbon::today()->diffInDays(Carbon::parse($item->expiration_date), false);
+                $item->days_until_expiry = max(0, $days);
                 return $item;
             });
 
