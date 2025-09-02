@@ -64,6 +64,13 @@ class CosmeticController extends Controller
                 });
             }
 
+            // 期限切れのみ
+            $expiredOnly = $request->boolean('expired');
+            if ($expiredOnly) {
+                $query->whereNotNull('expiration_date')
+                      ->where('expiration_date', '<', now()->toDateString());
+            }
+
             //プルダウン用
             $categories = Category::orderBy('sort_order', 'asc')->get();
 
