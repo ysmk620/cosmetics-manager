@@ -1,6 +1,9 @@
 <nav class="w-full sticky top-0 z-50 shadow-md" style="background-color: var(--color-subtle); color: var(--color-surface)">
   <div class="container-page py-4 flex items-center justify-between">
-    <a href="{{ auth()->check() ? route('cosmetics.index') : url('/') }}" class="text-2xl md:text-3xl font-semibold tracking-tight" style="color: var(--color-surface)">CosMemo</a>
+    <a href="{{ auth()->check() ? route('cosmetics.index') : url('/') }}" class="flex items-center gap-2 text-2xl md:text-3xl font-semibold tracking-tight" style="color: var(--color-surface)">
+      <img src="{{ asset('rougeicon-white.svg') }}?v={{ filemtime(public_path('rougeicon-white.svg')) }}" alt="CosMemo icon" class="h-7 w-7 md:h-8 md:w-8" />
+      <span>CosMemo</span>
+    </a>
 
     @auth
       <!-- Authenticated: desktop links -->
