@@ -8,9 +8,18 @@
     @auth
       <!-- Authenticated: desktop links -->
       <div class="hidden md:flex items-center gap-4">
-        <a href="{{ route('dashboard') }}" class="opacity-90 hover:opacity-100 px-3 py-2 rounded-md transition hover:bg-white/10" style="color: var(--color-surface)">ホーム</a>
-        <a href="{{ route('cosmetics.index') }}" class="opacity-90 hover:opacity-100 px-3 py-2 rounded-md transition hover:bg-white/10" style="color: var(--color-surface)">一覧</a>
-        <a href="{{ route('cosmetics.create') }}" class="opacity-90 hover:opacity-100 px-3 py-2 rounded-md transition hover:bg-white/10" style="color: var(--color-surface)">登録</a>
+        <a href="{{ route('dashboard') }}"
+           class="px-3 py-2 rounded-md transition hover:bg-white/10 {{ request()->routeIs('dashboard') ? 'bg-white/20 opacity-100' : 'opacity-90 hover:opacity-100' }}"
+           style="color: var(--color-surface)" @if(request()->routeIs('dashboard')) aria-current="page" @endif>ダッシュボード</a>
+        @php
+          $isCosmeticsList = request()->routeIs('cosmetics.index') || request()->routeIs('cosmetics.show') || request()->routeIs('cosmetics.edit');
+        @endphp
+        <a href="{{ route('cosmetics.index') }}"
+           class="px-3 py-2 rounded-md transition hover:bg-white/10 {{ $isCosmeticsList ? 'bg-white/20 opacity-100' : 'opacity-90 hover:opacity-100' }}"
+           style="color: var(--color-surface)" @if($isCosmeticsList) aria-current="page" @endif>一覧</a>
+        <a href="{{ route('cosmetics.create') }}"
+           class="px-3 py-2 rounded-md transition hover:bg-white/10 {{ request()->routeIs('cosmetics.create') ? 'bg-white/20 opacity-100' : 'opacity-90 hover:opacity-100' }}"
+           style="color: var(--color-surface)" @if(request()->routeIs('cosmetics.create')) aria-current="page" @endif>登録</a>
 
         <!-- Account dropdown (like Breeze) -->
         <div class="relative" x-data="{ open: false }" @keydown.escape.window="open = false">
@@ -43,10 +52,21 @@
           </svg>
         </button>
         <div x-cloak x-show="open" @click.outside="open=false" class="absolute right-4 top-full mt-2 min-w-48 rounded-2xl border p-4 shadow-xl backdrop-blur-md" style="background-color: color-mix(in oklab, var(--color-surface) 95%, transparent); border-color: color-mix(in oklab, var(--color-surface) 40%, transparent)">
-          <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-md hover:bg-black/5 transition" style="color: var(--color-text)">ホーム</a>
-          <a href="{{ route('cosmetics.index') }}" class="block px-3 py-2 rounded-md hover:bg-black/5 transition" style="color: var(--color-text)">一覧</a>
-          <a href="{{ route('cosmetics.create') }}" class="block px-3 py-2 rounded-md hover:bg-black/5 transition" style="color: var(--color-text)">登録</a>
-          <a href="{{ route('profile.edit') }}" class="block px-3 py-2 rounded-md hover:bg-black/5 transition" style="color: var(--color-text)">アカウント</a>
+          <a href="{{ route('dashboard') }}"
+             class="block px-3 py-2 rounded-md transition hover:bg-black/5 {{ request()->routeIs('dashboard') ? 'bg-black/10 font-medium' : '' }}"
+             style="color: var(--color-text)" @if(request()->routeIs('dashboard')) aria-current="page" @endif>ホーム</a>
+          @php
+            $isCosmeticsListMobile = request()->routeIs('cosmetics.index') || request()->routeIs('cosmetics.show') || request()->routeIs('cosmetics.edit');
+          @endphp
+          <a href="{{ route('cosmetics.index') }}"
+             class="block px-3 py-2 rounded-md transition hover:bg-black/5 {{ $isCosmeticsListMobile ? 'bg-black/10 font-medium' : '' }}"
+             style="color: var(--color-text)" @if($isCosmeticsListMobile) aria-current="page" @endif>一覧</a>
+          <a href="{{ route('cosmetics.create') }}"
+             class="block px-3 py-2 rounded-md transition hover:bg-black/5 {{ request()->routeIs('cosmetics.create') ? 'bg-black/10 font-medium' : '' }}"
+             style="color: var(--color-text)" @if(request()->routeIs('cosmetics.create')) aria-current="page" @endif>登録</a>
+          <a href="{{ route('profile.edit') }}"
+             class="block px-3 py-2 rounded-md transition hover:bg-black/5 {{ request()->routeIs('profile.edit') ? 'bg-black/10 font-medium' : '' }}"
+             style="color: var(--color-text)" @if(request()->routeIs('profile.edit')) aria-current="page" @endif>アカウント</a>
         </div>
       </div>
     @endauth
@@ -59,23 +79,23 @@
           </svg>
         </button>
         <div x-cloak x-show="open" @click.outside="open=false" class="absolute right-6 mt-2 min-w-44 rounded-xl border p-2 shadow-lg backdrop-blur-sm" style="background-color: var(--color-subtle); border-color: color-mix(in oklab, var(--color-surface) 20%, transparent)">
-          <a href="{{ url('/#about') }}" class="block px-3 py-2 rounded-md hover:bg-white/10 transition" style="color: var(--color-surface)">アプリ概要</a>
+          <a href="{{ url('/#about') }}" class="block px-3 py-2 rounded-md transition hover:bg-white/10 {{ request()->is('/') ? 'bg-white/20 font-medium' : '' }}" style="color: var(--color-surface)" @if(request()->is('/')) aria-current="page" @endif>アプリ概要</a>
           @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="block px-3 py-2 rounded-md hover:bg-white/10 transition" style="color: var(--color-surface)">新規登録</a>
+            <a href="{{ route('register') }}" class="block px-3 py-2 rounded-md transition hover:bg-white/10 {{ request()->routeIs('register') ? 'bg-white/20 font-medium' : '' }}" style="color: var(--color-surface)" @if(request()->routeIs('register')) aria-current="page" @endif>新規登録</a>
           @endif
           @if (Route::has('login'))
-            <a href="{{ route('login') }}" class="block px-3 py-2 rounded-md hover:bg-white/10 transition" style="color: var(--color-surface)">ログイン</a>
+            <a href="{{ route('login') }}" class="block px-3 py-2 rounded-md transition hover:bg-white/10 {{ request()->routeIs('login') ? 'bg-white/20 font-medium' : '' }}" style="color: var(--color-surface)" @if(request()->routeIs('login')) aria-current="page" @endif>ログイン</a>
           @endif
         </div>
       </div>
 
       <div class="hidden md:flex items-center gap-6">
-        <a href="{{ url('/#about') }}" class="opacity-90 hover:opacity-100 px-2 py-1 rounded-md transition hover:bg-white/10" style="color: var(--color-surface)">アプリ概要</a>
+        <a href="{{ url('/#about') }}" class="px-2 py-1 rounded-md transition hover:bg-white/10 {{ request()->is('/') ? 'bg-white/20 opacity-100' : 'opacity-90 hover:opacity-100' }}" style="color: var(--color-surface)" @if(request()->is('/')) aria-current="page" @endif>アプリ概要</a>
         @if (Route::has('register'))
-          <a href="{{ route('register') }}" class="opacity-90 hover:opacity-100 px-2 py-1 rounded-md transition hover:bg-white/10" style="color: var(--color-surface)">新規登録</a>
+          <a href="{{ route('register') }}" class="px-2 py-1 rounded-md transition hover:bg-white/10 {{ request()->routeIs('register') ? 'bg-white/20 opacity-100' : 'opacity-90 hover:opacity-100' }}" style="color: var(--color-surface)" @if(request()->routeIs('register')) aria-current="page" @endif>新規登録</a>
         @endif
         @if (Route::has('login'))
-          <a href="{{ route('login') }}" class="opacity-90 hover:opacity-100 px-2 py-1 rounded-md transition hover:bg-white/10" style="color: var(--color-surface)">ログイン</a>
+          <a href="{{ route('login') }}" class="px-2 py-1 rounded-md transition hover:bg-white/10 {{ request()->routeIs('login') ? 'bg-white/20 opacity-100' : 'opacity-90 hover:opacity-100' }}" style="color: var(--color-surface)" @if(request()->routeIs('login')) aria-current="page" @endif>ログイン</a>
         @endif
       </div>
     @endguest
