@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
   <body class="antialiased">
-    <div class="min-h-[100svh] bg-auth bg-cover bg-center" style="background-image: url('{{ asset('images/bg-auth.png') }}')">
+    <div class="min-h-[100svh] bg-auth">
       <x-ui.navbar />
       <main class="flex flex-col">
         {{ $slot }}
