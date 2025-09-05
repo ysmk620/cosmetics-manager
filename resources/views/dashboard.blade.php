@@ -8,12 +8,14 @@
         <!-- 総アイテム数 -->
         <a href="{{ route('cosmetics.index') }}" class="card p-3 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-primary)]/40">
             <div class="flex flex-col items-center gap-1">
-                <svg class="w-8 h-8 md:w-9 md:h-9" viewBox="0 0 24 24" aria-hidden="true" style="color: var(--color-subtle)">
-                    <rect x="4.5" y="4.5" width="7" height="7" rx="1.5" fill="currentColor" />
-                    <rect x="12.5" y="4.5" width="7" height="7" rx="1.5" fill="currentColor" />
-                    <rect x="4.5" y="12.5" width="7" height="7" rx="1.5" fill="currentColor" />
-                    <rect x="12.5" y="12.5" width="7" height="7" rx="1.5" fill="currentColor" />
-                </svg>
+                <div class="h-8 md:h-9 flex items-center justify-center overflow-hidden">
+                    <svg class="w-8 h-8 md:w-9 md:h-9 scale-[1.22]" viewBox="0 0 24 24" aria-hidden="true" style="color:  #4b792de7">
+                        <rect x="4.5" y="4.5" width="7" height="7" rx="1.5" fill="currentColor" />
+                        <rect x="12.5" y="4.5" width="7" height="7" rx="1.5" fill="currentColor" />
+                        <rect x="4.5" y="12.5" width="7" height="7" rx="1.5" fill="currentColor" />
+                        <rect x="12.5" y="12.5" width="7" height="7" rx="1.5" fill="currentColor" />
+                    </svg>
+                </div>
                 <p class="text-sm md:text-base font-medium opacity-80" style="color: var(--color-text)">総アイテム数</p>
                 <p class="text-4xl md:text-5xl font-extrabold tracking-tight leading-none" style="color: var(--color-text)">{{ $totalCount }}</p>
             </div>
@@ -22,9 +24,11 @@
         <!-- お気に入り数 -->
         <a href="{{ route('cosmetics.index', ['favorites' => 1]) }}" class="card p-3 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-primary)]/40">
             <div class="flex flex-col items-center gap-1">
-                <svg viewBox="0 0 24 24" class="w-9 h-9 md:w-11 md:h-11" aria-hidden="true" style="color: var(--color-subtle)">
-                    <path fill="currentColor" d="M11.645 20.91l-.007-.003C7.63 18.716 4.5 16.27 4.5 12.75A4.5 4.5 0 0 1 12 9a4.5 4.5 0 0 1 7.5 3.75c0 3.52-3.13 5.966-7.138 8.157l-.007.003a.75.75 0 0 1-.71 0z" />
-                </svg>
+                <div class="h-8 md:h-9 flex items-center justify-center overflow-hidden">
+                    <svg viewBox="0 0 24 24" class="w-8 h-8 md:w-9 md:h-9 origin-bottom scale-x-[1.25] scale-y-[1.34]" aria-hidden="true" style="color: #e45475ff">
+                        <path fill="currentColor" d="M11.645 20.91l-.007-.003C7.63 18.716 4.5 16.27 4.5 12.75A4.5 4.5 0 0 1 12 9a4.5 4.5 0 0 1 7.5 3.75c0 3.52-3.13 5.966-7.138 8.157l-.007.003a.75.75 0 0 1-.71 0z" />
+                    </svg>
+                </div>
                 <p class="text-sm md:text-base font-medium opacity-80" style="color: var(--color-text)">お気に入り</p>
                 <p class="text-4xl md:text-5xl font-extrabold tracking-tight leading-none" style="color: var(--color-text)">{{ $favoritesCount }}</p>
             </div>
@@ -33,7 +37,7 @@
         <!-- 期限切れ数 -->
         <a href="{{ route('cosmetics.index', ['expired' => 1]) }}" class="card p-3 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-primary)]/40">
             <div class="flex flex-col items-center gap-1">
-                <svg viewBox="0 0 24 24" class="w-8 h-8 md:w-9 md:h-9" aria-hidden="true" style="color: var(--color-subtle)">
+                <svg viewBox="0 0 24 24" class="w-8 h-8 md:w-9 md:h-9" aria-hidden="true" style="color: #2b6f9ca8">
                     <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" />
                     <path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
