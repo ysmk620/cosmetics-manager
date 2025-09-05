@@ -100,9 +100,8 @@
             </div>
         </div>
 
-        <!-- アイテム追加CTAカード -->
-        <a href="{{ route('cosmetics.create') }}" class="card p-6 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4"
-            style="background: var(--color-subtle); color: var(--color-surface)">
+        <!-- アイテム追加CTAカード (Muted Orange Gradient, stronger hover) -->
+        <a href="{{ route('cosmetics.create') }}" class="block p-6 text-center rounded-2xl bg-gradient-to-br from-[#E58C5A] to-[#F2BE86] text-white shadow-lg transition-transform transition-shadow transition-[filter,background] duration-200 ease-out transform hover:-translate-y-0.5 hover:shadow-2xl hover:brightness-110 hover:saturate-110 hover:from-[#EA9969] hover:to-[#F5C690] focus:outline-none focus:ring-4 focus:ring-[#E58C5A]/40 active:translate-y-0">
             <svg class="w-12 h-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
             </svg>
