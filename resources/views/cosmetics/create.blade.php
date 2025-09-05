@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="max-w-xl mx-auto space-y-6">
-  <h2 class="text-3xl font-bold text-center" style="color: var(--color-text)">コスメ登録</h2>
+  <h2 class="text-3xl font-bold text-center" style="color: var(--color-text)">アイテム登録</h2>
 
   @if(session('success'))
   <div class="p-4 card" style="color: var(--color-text)">
