@@ -115,9 +115,26 @@
 
 @push('scripts')
 <script>
-  // カテゴリ分布: 遅延ロード + 凡例描画
   const cat = @json($categoryCounts->values());
-  const palette = ['#CDA987', '#E6D6C6', '#F1E5D8', '#D1B398', '#B89274', '#8B6B56', '#F5EDE4', '#EADCCF'];
+
+  function genWarmPalette(n) {
+    const start = 26;
+    const end = 46;
+    const range = end - start;
+    const biasExp = 1.8;
+    const colors = [];
+    let seed = 0.32;
+    const GOLDEN = 0.61803398875;
+    for (let i = 0; i < n; i++) {
+      seed = (seed + GOLDEN) % 1;
+      const t = Math.pow(seed, biasExp);
+      const h = Math.round(start + t * range);
+      const s = 90;
+      const l = 58 + (i % 3) * 8;
+      colors.push(`hsl(${h}, ${s}%, ${l}%)`);
+    }
+    return colors;
+  }
 
   function ensureChartJs() {
     return new Promise((resolve) => {
@@ -165,7 +182,7 @@
     if (!el) return;
     ensureChartJs().then(() => {
       const ctx = el.getContext('2d');
-      const colors = cat.map((_, i) => palette[i % palette.length]);
+      const colors = genWarmPalette(cat.length);
       renderLegend(colors);
       new Chart(ctx, {
         type: 'doughnut',
