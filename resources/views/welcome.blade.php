@@ -1,19 +1,21 @@
 <x-guest-layout>
-  <!-- Hero -->
-  <section class="container-page text-center pt-32 md:pt-40 pb-32 md:pb-48 min-h-[64vh] md:min-h-[72vh]">
-    <h1 class="text-6xl md:text-7xl font-bold tracking-tight" style="color: var(--color-text)">CosMemo</h1>
-    <p class="mt-8 md:mt-8 text-base md:text-lg" style="color: color-mix(in oklab, var(--color-text) 80%, transparent)">
-      コスメの整理整頓を楽しく、効率的に。<br class="hidden sm:block">お気に入りや所持品を記録して、迷わず使い切る体験を。
-    </p>
-    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
-      @if (Route::has('register'))
-      <x-ui.button variant="primary" as="a" href="{{ route('register') }}" class="w-full">新規登録</x-ui.button>
-      @endif
-      @if (Route::has('login'))
-      <x-ui.button variant="ghost" as="a" href="{{ route('login') }}" class="w-full border" style="border-color: color-mix(in oklab, var(--color-text) 55%, transparent)">ログイン</x-ui.button>
-      @endif
-    </div>
-  </section>
+  <!-- Hero  -->
+  <div class="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-96px)] flex items-center">
+    <section class="container-page text-center py-24 md:py-32">
+      <h1 class="text-6xl md:text-7xl font-bold tracking-tight" style="color: var(--color-text)">CosMemo</h1>
+      <p class="mt-8 md:mt-8 text-base md:text-lg" style="color: color-mix(in oklab, var(--color-text) 80%, transparent)">
+        コスメの整理整頓を楽しく、効率的に。<br class="hidden sm:block">お気に入りや所持品を記録して、迷わず使い切る体験を。
+      </p>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
+        @if (Route::has('register'))
+        <x-ui.button variant="primary" as="a" href="{{ route('register') }}" class="w-full">新規登録</x-ui.button>
+        @endif
+        @if (Route::has('login'))
+        <x-ui.button variant="ghost" as="a" href="{{ route('login') }}" class="w-full border" style="border-color: color-mix(in oklab, var(--color-text) 55%, transparent)">ログイン</x-ui.button>
+        @endif
+      </div>
+    </section>
+  </div>
 
   <!-- About -->
   <section id="about" class="mt-8 md:mt-8 py-24 md:py-28 bg-[color:var(--bg-app)] border-t" style="border-color: var(--color-line)">
