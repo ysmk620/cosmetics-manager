@@ -79,7 +79,13 @@
         <!-- 期限間近アイテムカード -->
         <div class="card p-6">
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold" style="color: var(--color-text)">期限間近のアイテム</h3>
+                <h3 class="text-lg font-semibold flex items-center gap-3" style="color: var(--color-text)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.0" stroke-miterlimit="10" class="w-5 h-5 md:w-6 md:h-6" aria-hidden="true">
+                        <path d="M20.59,14.86V10.09A8.6,8.6,0,0,0,12,1.5h0a8.6,8.6,0,0,0-8.59,8.59v4.77L1.5,16.77v1.91h21V16.77Z" ></path>
+                        <path d="M14.69,18.68a2.55,2.55,0,0,1,.17,1,2.86,2.86,0,0,1-5.72,0,2.55,2.55,0,0,1,.17-1"></path>
+                    </svg>
+                    <span>期限間近のアイテム</span>
+                </h3>
             </div>
             <div class="mt-4 space-y-3">
                 @forelse($expiringItems as $item)
