@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="space-y-6">
-    <h2 class="text-3xl font-bold" style="color: var(--color-text)">コスメ一覧</h2>
+    <h2 class="text-3xl font-bold" style="color: var(--color-text)">アイテム一覧</h2>
 
     @if(session('success'))
     <div class="p-4 card" style="color: var(--color-text)">
