@@ -37,9 +37,10 @@
         <!-- 期限切れ数 -->
         <a href="{{ route('cosmetics.index', ['expired' => 1]) }}" class="card p-3 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-primary)]/40">
             <div class="flex flex-col items-center gap-1">
-                <svg viewBox="0 0 24 24" class="w-8 h-8 md:w-9 md:h-9" aria-hidden="true" style="color: #2b6f9ca8">
-                    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" />
-                    <path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                <svg viewBox="0 0 24 24" class="w-8 h-8 md:w-9 md:h-9" aria-hidden="true" style="color: #2b6f9ca8" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="10.5"></circle>
+                    <circle cx="12" cy="12" r="0.95"></circle>
+                    <polyline points="12 4.36 12 12 16.77 16.77"></polyline>
                 </svg>
                 <p class="text-sm md:text-base font-medium opacity-80" style="color: var(--color-text)">期限切れ</p>
                 <p class="text-4xl md:text-5xl font-extrabold tracking-tight leading-none" style="color: var(--color-text)">{{ $expiredCount }}</p>
