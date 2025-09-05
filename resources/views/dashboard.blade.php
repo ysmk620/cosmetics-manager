@@ -9,7 +9,7 @@
         <a href="{{ route('cosmetics.index') }}" class="card p-3 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-primary)]/40">
             <div class="flex flex-col items-center gap-1">
                 <div class="h-8 md:h-9 flex items-center justify-center overflow-hidden">
-                    <svg class="w-8 h-8 md:w-9 md:h-9 scale-[1.22]" viewBox="0 0 24 24" aria-hidden="true" style="color:  #4b792de7">
+                    <svg class="w-8 h-8 md:w-9 md:h-9 scale-[1.22]" viewBox="0 0 24 24" aria-hidden="true" style="color:  #e9b72fc0">
                         <rect x="4.5" y="4.5" width="7" height="7" rx="1.5" fill="currentColor" />
                         <rect x="12.5" y="4.5" width="7" height="7" rx="1.5" fill="currentColor" />
                         <rect x="4.5" y="12.5" width="7" height="7" rx="1.5" fill="currentColor" />
@@ -25,7 +25,7 @@
         <a href="{{ route('cosmetics.index', ['favorites' => 1]) }}" class="card p-3 text-center block transition transform hover:shadow-2xl hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-primary)]/40">
             <div class="flex flex-col items-center gap-1">
                 <div class="h-8 md:h-9 flex items-center justify-center overflow-hidden">
-                    <svg viewBox="0 0 24 24" class="w-8 h-8 md:w-9 md:h-9 origin-bottom scale-x-[1.25] scale-y-[1.34]" aria-hidden="true" style="color: #e45475ff">
+                    <svg viewBox="0 0 24 24" class="w-8 h-8 md:w-9 md:h-9 origin-bottom scale-x-[1.25] scale-y-[1.34]" aria-hidden="true" style="color: #e6607fe5">
                         <path fill="currentColor" d="M11.645 20.91l-.007-.003C7.63 18.716 4.5 16.27 4.5 12.75A4.5 4.5 0 0 1 12 9a4.5 4.5 0 0 1 7.5 3.75c0 3.52-3.13 5.966-7.138 8.157l-.007.003a.75.75 0 0 1-.71 0z" />
                     </svg>
                 </div>
