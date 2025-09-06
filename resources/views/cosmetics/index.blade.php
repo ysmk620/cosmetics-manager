@@ -11,46 +11,68 @@
     @endif
 
     {{-- フィルタフォーム --}}
-    <form action="{{ route('cosmetics.index') }}" method="GET" class="card p-4 grid gap-3 md:grid-cols-3" style="color: var(--color-text)">
-        <div class="md:col-span-1">
+    <form action="{{ route('cosmetics.index') }}" method="GET"
+        class="card p-4 grid gap-4 md:grid-cols-4 items-center"
+        style="color: var(--color-text)">
+
+        {{-- キーワード --}}
+        <div>
             <label for="q" class="form-label">キーワード（アイテム名/ブランド）</label>
-            <input id="q" name="q" type="text" value="{{ request('q') }}" placeholder="例: リップ or CHANEL" class="form-input" />
+            <input id="q" name="q" type="text" value="{{ request('q') }}"
+                placeholder="例: リップ or CHANEL"
+                class="form-input w-full" />
         </div>
-        <div class="md:col-span-1">
+
+        {{-- カテゴリ --}}
+        <div>
             <label for="category_id" class="form-label">カテゴリ</label>
-            <select id="category_id" name="category_id" class="form-input">
+            <select id="category_id" name="category_id" class="form-input w-full">
                 <option value="">すべて</option>
-                @isset($categories)
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}" @selected(request('category_id')==$category->id)>
                     {{ $category->name }}
                 </option>
                 @endforeach
-                @endisset
             </select>
         </div>
-        <div class="flex gap-5 md:items-center md:self-center md:col-span-1">
-            <label class="inline-flex items-center gap-3 cursor-pointer text-base md:text-lg">
-                <input type="checkbox" name="favorites" value="1" {{ !empty($favoritesOnly) ? 'checked' : '' }} class="scale-125 shrink-0 accent-[color:var(--color-primary)]">
-                <span class="leading-tight">お気に入りのみ</span>
+
+        {{-- チェックボックス（横並び） --}}
+        <div class="self-center">
+            <label class="inline-flex items-center gap-2 cursor-pointer text-sm md:text-base mr-4">
+                <input type="checkbox" name="favorites" value="1" {{ !empty($favoritesOnly) ? 'checked' : '' }}
+                    class="scale-125 accent-[color:var(--color-primary)]">
+                <span>お気に入りのみ</span>
             </label>
-            <x-ui.button type="submit" variant="primary">検索</x-ui.button>
-            <x-ui.button as="a" variant="ghost" href="{{ route('cosmetics.index') }}" class="border border-[color:var(--color-line)]">クリア</x-ui.button>
+            <label class="inline-flex items-center gap-2 cursor-pointer text-sm md:text-base">
+                <input type="checkbox" name="expired" value="1" {{ !empty($expiredOnly) ? 'checked' : '' }}
+                    class="scale-125 accent-[color:var(--color-primary)]">
+                <span>期限切れのみ</span>
+            </label>
+        </div>
+
+        {{-- ボタン --}}
+        <div class="flex gap-2 self-center">
+            <x-ui.button type="submit" variant="primary" class="w-full">検索</x-ui.button>
+            <x-ui.button as="a" variant="ghost" href="{{ route('cosmetics.index') }}"
+                class="w-full border border-[color:var(--color-line)]">クリア</x-ui.button>
         </div>
     </form>
+
+
+
 
     {{-- カードグリッド --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         @forelse ($cosmetics as $cosmetic)
-            @php
-                $isExpired = $cosmetic->expiration_date && $cosmetic->expiration_date < now()->toDateString();
-                $expirationDate = $cosmetic->expiration_date ? \Carbon\Carbon::parse($cosmetic->expiration_date)->startOfDay() : null;
-                $daysUntil = $expirationDate ? now()->startOfDay()->diffInDays($expirationDate, false) : null;
-                $nowFav = isset($favoritedIds) && in_array($cosmetic->id, $favoritedIds, true);
+        @php
+        $isExpired = $cosmetic->expiration_date && $cosmetic->expiration_date < now()->toDateString();
+            $expirationDate = $cosmetic->expiration_date ? \Carbon\Carbon::parse($cosmetic->expiration_date)->startOfDay() : null;
+            $daysUntil = $expirationDate ? now()->startOfDay()->diffInDays($expirationDate, false) : null;
+            $nowFav = isset($favoritedIds) && in_array($cosmetic->id, $favoritedIds, true);
             @endphp
 
             <div class="relative card p-5 transition cursor-pointer hover:shadow-xl" style="color: var(--color-text)"
-                 onclick="window.location='{{ route('cosmetics.show', $cosmetic) }}'">
+                onclick="window.location='{{ route('cosmetics.show', $cosmetic) }}'">
                 {{-- お気に入りトグル（右上） --}}
                 <div class="absolute top-2 right-2">
                     <form method="POST" action="{{ route('cosmetics.favorite', $cosmetic) }}">
@@ -64,13 +86,13 @@
                             title="{{ $nowFav ? 'お気に入り解除' : 'お気に入り登録' }}"
                             onclick="event.stopPropagation();">
                             @if($nowFav)
-                                <svg viewBox="0 0 24 24" class="w-7 h-7 text-red-500" aria-hidden="true">
-                                    <path fill="currentColor" d="M11.645 20.91l-.007-.003C7.63 18.716 4.5 16.27 4.5 12.75A4.5 4.5 0 0 1 12 9a4.5 4.5 0 0 1 7.5 3.75c0 3.52-3.13 5.966-7.138 8.157l-.007.003a.75.75 0 0 1-.71 0z" />
-                                </svg>
+                            <svg viewBox="0 0 24 24" class="w-7 h-7 text-red-500" aria-hidden="true">
+                                <path fill="currentColor" d="M11.645 20.91l-.007-.003C7.63 18.716 4.5 16.27 4.5 12.75A4.5 4.5 0 0 1 12 9a4.5 4.5 0 0 1 7.5 3.75c0 3.52-3.13 5.966-7.138 8.157l-.007.003a.75.75 0 0 1-.71 0z" />
+                            </svg>
                             @else
-                                <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
-                                    <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.936 0-3.622 1.126-4.312 2.733-.69-1.607-2.376-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 11.25 9 11.25s9-4.03 9-11.25z" />
-                                </svg>
+                            <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
+                                <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.936 0-3.622 1.126-4.312 2.733-.69-1.607-2.376-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 11.25 9 11.25s9-4.03 9-11.25z" />
+                            </svg>
                             @endif
                         </button>
                     </form>
@@ -79,9 +101,9 @@
                 {{-- アイコン --}}
                 <div class="text-center mt-2 mb-4">
                     @if ($cosmetic->emoji)
-                        <div class="text-6xl md:text-7xl leading-none">{{ $cosmetic->emoji }}</div>
+                    <div class="text-6xl md:text-7xl leading-none">{{ $cosmetic->emoji }}</div>
                     @else
-                        <div class="text-6xl md:text-7xl leading-none text-gray-300">💠</div>
+                    <div class="text-6xl md:text-7xl leading-none text-gray-300">💠</div>
                     @endif
                 </div>
 
@@ -91,31 +113,31 @@
 
                     <div class="flex items-center gap-2">
                         <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs border"
-                              style="background: color-mix(in oklab, var(--color-secondary) 55%, white); border-color: var(--color-line); color: var(--color-text);">
+                            style="background: color-mix(in oklab, var(--color-secondary) 55%, white); border-color: var(--color-line); color: var(--color-text);">
                             {{ $cosmetic->category->name ?? '未設定' }}
                         </span>
                     </div>
 
                     <div class="text-xs">
                         @if ($cosmetic->expiration_date)
-                            @if ($isExpired)
-                                <span class="text-red-600 font-medium">使用期限 {{ $cosmetic->expiration_date }}（期限切れ）</span>
-                            @elseif ($daysUntil !== null && $daysUntil <= 30)
-                                <span class="text-orange-600 font-medium">使用期限 {{ $cosmetic->expiration_date }}（あと{{ floor($daysUntil) }}日）</span>
+                        @if ($isExpired)
+                        <span class="text-red-600 font-medium">使用期限 {{ $cosmetic->expiration_date }}（期限切れ）</span>
+                        @elseif ($daysUntil !== null && $daysUntil <= 30)
+                            <span class="text-orange-600 font-medium">使用期限 {{ $cosmetic->expiration_date }}（あと{{ floor($daysUntil) }}日）</span>
                             @else
-                                <span class="text-green-600">使用期限 {{ $cosmetic->expiration_date }}</span>
+                            <span class="text-green-600">使用期限 {{ $cosmetic->expiration_date }}</span>
                             @endif
-                        @else
+                            @else
                             <span class="text-[color:var(--color-subtle)]">使用期限 未設定</span>
-                        @endif
+                            @endif
                     </div>
                 </div>
             </div>
-        @empty
+            @empty
             <div class="sm:col-span-2 lg:col-span-3">
                 <div class="p-8 card text-center text-gray-500">条件に一致するアイテムがありません。</div>
             </div>
-        @endforelse
+            @endforelse
     </div>
 
     {{-- ページネーション --}}
