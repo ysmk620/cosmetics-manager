@@ -4,7 +4,7 @@
     <section class="container-page text-center py-24 md:py-32">
       <h1 class="text-6xl md:text-7xl font-bold tracking-tight" style="color: var(--color-text)">CosMemo</h1>
       <p class="mt-8 md:mt-8 text-base md:text-lg" style="color: color-mix(in oklab, var(--color-text) 80%, transparent)">
-        コスメの整理整頓を楽しく、効率的に。<br class="hidden sm:block">お気に入りや所持品を記録して、迷わず使い切る体験を。
+        コスメの情報を一箇所に。<br class="hidden sm:block">楽しく、効率的にコスメの整理整頓。
       </p>
       <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
         @if (Route::has('register'))
@@ -24,9 +24,9 @@
         <span class="inline-block rounded-full px-6 py-2 shadow-md text-base md:text-lg" style="background-color: var(--color-subtle); color: var(--color-surface)">アプリ概要</span>
       </h2>
       <p class="mx-auto max-w-[62ch] md:max-w-[68ch] leading-relaxed text-center text-lg md:text-xl" style="color: color-mix(in oklab, var(--color-text) 80%, transparent); text-wrap: balance; text-wrap: pretty;">
-        CosMemo は、所持コスメを気持ちよく管理するためのミニマルなメモアプリです。</p>
+        CosMemo は、コスメの情報を記録・可視化できるアプリケーションです。</p>
       <p class="mx-auto max-w-[62ch] md:max-w-[68ch] leading-relaxed text-center text-lg md:text-xl" style="color: color-mix(in oklab, var(--color-text) 80%, transparent); text-wrap: balance; text-wrap: pretty;">
-        カテゴリやブランド、開封日・使用期限を記録し、似た色の買い増しや使い忘れを防ぎます。</p>
+       開封日・使用期限・品番などをひとまとめに管理し、必要な情報にすぐアクセスできます。</p>
 
 
       <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
