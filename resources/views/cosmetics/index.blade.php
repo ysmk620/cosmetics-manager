@@ -34,6 +34,10 @@
                 <input type="checkbox" name="favorites" value="1" {{ !empty($favoritesOnly) ? 'checked' : '' }} class="scale-125 shrink-0 accent-[color:var(--color-primary)]">
                 <span class="leading-tight">お気に入りのみ</span>
             </label>
+            <label class="inline-flex items-center gap-3 cursor-pointer text-base md:text-lg">
+                <input type="checkbox" name="expired" value="1" {{ !empty($expiredOnly) ? 'checked' : '' }} class="scale-125 shrink-0 accent-[color:var(--color-primary)]">
+                <span class="leading-tight">期限切れのみ</span>
+            </label>
             <x-ui.button type="submit" variant="primary">検索</x-ui.button>
             <x-ui.button as="a" variant="ghost" href="{{ route('cosmetics.index') }}" class="border border-[color:var(--color-line)]">クリア</x-ui.button>
         </div>

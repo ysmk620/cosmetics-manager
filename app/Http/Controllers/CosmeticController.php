@@ -68,7 +68,7 @@ class CosmeticController extends Controller
             $expiredOnly = $request->boolean('expired');
             if ($expiredOnly) {
                 $query->whereNotNull('expiration_date')
-                      ->where('expiration_date', '<', now()->toDateString());
+                    ->where('expiration_date', '<', now()->toDateString());
             }
 
             //プルダウン用
@@ -83,7 +83,7 @@ class CosmeticController extends Controller
                 ->pluck('cosmetic_id')
                 ->toArray();
 
-            return view('cosmetics.index', compact('cosmetics', 'categories', 'favoritesOnly', 'favoritedIds'));
+            return view('cosmetics.index', compact('cosmetics', 'categories', 'favoritesOnly', 'favoritedIds', 'expiredOnly'));
         } catch (\Exception $e) {
             logger('Cosmetics index error: ' . $e->getMessage());
             return response('Server Error: ' . $e->getMessage(), 500);
