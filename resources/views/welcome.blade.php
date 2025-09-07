@@ -38,7 +38,7 @@
             </svg>
             <span> 記録と整理</span>
           </h3>
-          <p class="text-base md:text-lg" style="color: color-mix(in oklab, var(--color-text) 75%, transparent)">アイテム/ブランド/色番・品番をまとめて管理します。リピート購入時も迷いません。</p>
+          <p class="text-base md:text-lg" style="color: color-mix(in oklab, var(--color-text) 75%, transparent)">アイテム/ブランド/色番・品番を記録します。リピート購入時も迷いません。</p>
         </div>
         <div class="relative overflow-hidden p-5 md:p-6 rounded-2xl bg-[color:var(--color-surface)] border border-[color:var(--color-line)] shadow-md">
           <div class="absolute top-0 inset-x-0 h-1 bg-[color:var(--color-primary)]"></div>
