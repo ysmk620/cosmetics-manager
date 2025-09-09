@@ -1,5 +1,5 @@
 <x-guest-layout>
-  <div class="w-full max-w-md">
+  <div class="w-full max-w-md mx-auto mt-16 md:mt-24">
     <div class="text-center mb-6">
       <h1 class="text-3xl font-bold" style="color: var(--color-text)">CosMemo</h1>
       <p class="mt-2 text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">メールアドレスの確認</p>
