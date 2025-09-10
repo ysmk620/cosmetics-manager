@@ -81,13 +81,16 @@ erDiagram
     USERS {
         bigint id PK
         string name
-        string email
+        string email               "unique"
+        timestamp email_verified_at "nullable"
+        string password
+        string remember_token      "nullable"
         timestamps timestamps
     }
 
     CATEGORIES {
         bigint id PK
-        string name
+        string name               "unique"
         integer sort_order
         timestamps timestamps
     }
@@ -96,18 +99,19 @@ erDiagram
         bigint id PK
         bigint user_id FK
         string name
-        string brand
-        string color_product_code
-        bigint category_id FK
-        date   expiration_date
-        string emoji
-        string memo  "<= 120 chars"
+        string brand                 "nullable"
+        string color_product_code    "<= 50 chars, nullable"
+        bigint category_id FK        "nullable (on delete: set null)"
+        date   expiration_date       "nullable"
+        string emoji                 "<= 4 chars, nullable"
+        string memo                  "<= 120 chars, nullable"
         timestamps timestamps
     }
 
     FAVORITES {
-        bigint user_id FK
-        bigint cosmetic_id FK
+        bigint id PK
+        bigint user_id FK         "on delete: cascade, unique pair"
+        bigint cosmetic_id FK     "on delete: cascade, unique pair"
         timestamps timestamps
     }
 ```
@@ -116,6 +120,8 @@ erDiagram
 - 一覧はテーブルからカードグリッド（1列:モバイル / 2列:sm / 3列:lg）へ刷新済み。
 - フィルタ（キーワード・カテゴリ・お気に入り）やページネーションは Laravel 側で処理し、クエリストリングを保持。
 - お気に入り切替は `PATCH /cosmetics/{id}/favorite` のサーバ処理で実行（Ajax化も可能）。
+- `CATEGORIES.name` は一意制約（UNIQUE）を持つ。
+- `FAVORITES` はサロゲートキー `id` を持ち、`UNIQUE(user_id, cosmetic_id)` を付与。`users`/`cosmetics` の削除時はカスケードで関連行が削除される。
 
 ## 開発とビルド
 
@@ -128,5 +134,3 @@ erDiagram
 - DB: `.env` で `DB_CONNECTION=pgsql` を指定。PHP に `pdo_pgsql` 拡張が必要。
 - ルーティング: `routes/web.php` に `auth` ミドルウェア配下で `cosmetics.*` ルートを定義。
 - コントローラ: `App\Http\Controllers\CosmeticController` が CRUD とお気に入り切替を担当。
-
-
