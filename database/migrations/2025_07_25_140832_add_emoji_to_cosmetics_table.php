@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cosmetics', function (Blueprint $table) {
-            $table->string('emoji', 4)->nullable()->after('expiration_date');
+            $table->string('emoji', 4)->nullable();
         });
     }
 
