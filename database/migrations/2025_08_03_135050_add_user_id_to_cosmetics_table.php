@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('cosmetics', function (Blueprint $table) {
             $table->foreignId('user_id')
-                ->after('id')
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
