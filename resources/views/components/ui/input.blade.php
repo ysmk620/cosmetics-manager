@@ -3,11 +3,16 @@
     'name',
     'type' => 'text',
     'value' => null,
+    'hint' => null,
 ])
 
 <div {{ $attributes->class(['w-full'])->except(['class']) }}>
     @if($label)
         <label for="{{ $name }}" class="form-label">{{ $label }}</label>
+    @endif
+
+    @if($hint)
+        <p class="mb-1 text-xs" style="color: color-mix(in oklab, var(--color-text) 60%, transparent)">{{ $hint }}</p>
     @endif
 
     <input
@@ -22,4 +27,3 @@
         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
     @enderror
 </div>
-

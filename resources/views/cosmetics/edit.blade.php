@@ -82,6 +82,7 @@
     {{-- 使用期限 --}}
     <div>
       <label class="form-label">使用期限</label>
+      <p class="mb-1 text-xs" style="color: color-mix(in oklab, var(--color-text) 60%, transparent)">目安・・・未開封：３年 / 開封後：６ヶ月～１年</p>
       <input type="date" name="expiration_date" value="{{ old('expiration_date', $cosmetic->expiration_date) }}" class="form-input">
       @error('expiration_date')
       <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
