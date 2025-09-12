@@ -66,7 +66,7 @@
     </div>
 
     {{-- 使用期限 --}}
-    <x-ui.input label="使用期限" name="expiration_date" type="date" />
+    <x-ui.input label="使用期限" name="expiration_date" type="date" hint="目安・・・未開封：３年 / 開封後：６ヶ月～１年" />
 
     {{-- メモ --}}
     <div>
