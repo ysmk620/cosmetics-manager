@@ -75,11 +75,11 @@
 
 
 
-    {{-- 送信ボタン --}}
-    <button type="submit"
-      class="btn btn-primary w-full px-6 py-3">
-      更新する
-    </button>
+    {{-- アクションボタン --}}
+    <div class="flex flex-col sm:flex-row gap-3">
+      <a href="{{ route('cosmetics.index') }}" class="btn btn-secondary w-full sm:flex-1 px-6 py-3">キャンセル</a>
+      <button type="submit" class="btn btn-primary w-full sm:flex-1 px-6 py-3">更新する</button>
+    </div>
   </form>
 </div>
 @endsection
