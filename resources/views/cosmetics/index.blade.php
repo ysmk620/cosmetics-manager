@@ -16,12 +16,7 @@
         style="color: var(--color-text)">
 
         {{-- キーワード --}}
-        <div>
-            <label for="q" class="form-label">キーワード（アイテム名/ブランド）</label>
-            <input id="q" name="q" type="text" value="{{ request('q') }}"
-                placeholder="例: リップ or CHANEL"
-                class="form-input w-full" />
-        </div>
+        <x-ui.input label="キーワード（アイテム名/ブランド)" name="q" value="{{ request('q') }}" placeholder="例: リップ or CHANEL" class="w-full" />
 
         {{-- カテゴリ --}}
         <div>
@@ -52,9 +47,8 @@
 
         {{-- ボタン --}}
         <div class="flex gap-2 self-center">
-            <x-ui.button type="submit" variant="primary" class="w-full">検索</x-ui.button>
-            <x-ui.button as="a" variant="ghost" href="{{ route('cosmetics.index') }}"
-                class="w-full border border-[color:var(--color-line)]">クリア</x-ui.button>
+            <button type="submit" class="btn btn-primary w-full">検索</button>
+            <a href="{{ route('cosmetics.index') }}" class="btn btn-ghost w-full border border-[color:var(--color-line)]">クリア</a>
         </div>
     </form>
 

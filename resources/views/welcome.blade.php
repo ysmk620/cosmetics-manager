@@ -7,10 +7,10 @@
         コスメの情報を一箇所に。<br class="hidden sm:block">楽しく、効率的にコスメを整理整頓。
       <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
         @if (Route::has('register'))
-        <x-ui.button variant="primary" as="a" href="{{ route('register') }}" class="w-full">新規登録</x-ui.button>
+        <a href="{{ route('register') }}" class="btn btn-primary w-full">新規登録</a>
         @endif
         @if (Route::has('login'))
-        <x-ui.button variant="ghost" as="a" href="{{ route('login') }}" class="w-full border" style="border-color: color-mix(in oklab, var(--color-text) 55%, transparent)">ログイン</x-ui.button>
+        <a href="{{ route('login') }}" class="btn btn-ghost w-full border" style="border-color: color-mix(in oklab, var(--color-text) 55%, transparent)">ログイン</a>
         @endif
       </div>
     </section>

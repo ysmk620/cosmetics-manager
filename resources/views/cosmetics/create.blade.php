@@ -40,13 +40,7 @@
     <x-ui.input label="アイテム名" name="name" required />
 
     {{-- カラー・品番（統合） --}}
-    <div>
-      <label class="form-label">カラー・品番</label>
-      <input type="text" name="color_product_code" value="{{ old('color_product_code') }}" class="form-input" maxlength="50" placeholder="例: ピンクベージュ / #02">
-      @error('color_product_code')
-      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
-      @enderror
-    </div>
+    <x-ui.input label="カラー・品番" name="color_product_code" value="{{ old('color_product_code') }}" maxlength="50" placeholder="例: ピンクベージュ / #02" />
 
     {{-- ブランド --}}
     <x-ui.input label="ブランド" name="brand" />
@@ -80,7 +74,7 @@
 
 
     {{-- 送信ボタン --}}
-    <x-ui.button variant="primary" type="submit" class="w-full">登録する</x-ui.button>
+    <button type="submit" class="btn btn-primary w-full">登録する</button>
   </form>
 </div>
 @endsection

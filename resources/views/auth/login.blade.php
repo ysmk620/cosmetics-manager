@@ -25,7 +25,7 @@
           @endif
         </div>
 
-        <x-ui.button variant="primary" type="submit" class="w-full">ログイン</x-ui.button>
+        <button type="submit" class="btn btn-primary w-full">ログイン</button>
 
         <p class="text-center text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">
           アカウント未作成の方は

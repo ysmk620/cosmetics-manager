@@ -16,7 +16,7 @@
         <x-ui.input label="新しいパスワード" name="password" type="password" required autocomplete="new-password" />
         <x-ui.input label="新しいパスワード（確認）" name="password_confirmation" type="password" required autocomplete="new-password" />
 
-        <x-ui.button variant="primary" type="submit" class="w-full">パスワードを更新</x-ui.button>
+        <button type="submit" class="btn btn-primary w-full">パスワードを更新</button>
       </form>
     </div>
   </div>

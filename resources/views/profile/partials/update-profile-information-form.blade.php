@@ -29,7 +29,7 @@
         @endif
 
         <div class="flex items-center gap-3">
-            <x-ui.button variant="primary" type="submit">保存</x-ui.button>
+            <button type="submit" class="btn btn-primary">保存</button>
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm" style="color: color-mix(in oklab, var(--color-text) 80%, transparent)">保存しました。</p>
             @endif
