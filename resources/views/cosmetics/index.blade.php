@@ -16,12 +16,7 @@
         style="color: var(--color-text)">
 
         {{-- キーワード --}}
-        <div>
-            <label for="q" class="form-label">キーワード（アイテム名/ブランド）</label>
-            <input id="q" name="q" type="text" value="{{ request('q') }}"
-                placeholder="例: リップ or CHANEL"
-                class="form-input w-full" />
-        </div>
+        <x-ui.input label="キーワード（アイテム名/ブランド)" name="q" value="{{ request('q') }}" placeholder="例: リップ or CHANEL" class="w-full" />
 
         {{-- カテゴリ --}}
         <div>

@@ -39,31 +39,13 @@
     </div>
 
     {{-- アイテム（商品名） --}}
-    <div>
-      <label class="form-label">アイテム名</label>
-      <input type="text" name="name" required value="{{ old('name', $cosmetic->name) }}" class="form-input">
-      @error('name')
-      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
-      @enderror
-    </div>
+    <x-ui.input label="アイテム名" name="name" type="text" required value="{{ old('name', $cosmetic->name) }}" />
 
     {{-- カラー・品番（統合） --}}
-    <div>
-      <label class="form-label">カラー・品番</label>
-      <input type="text" name="color_product_code" value="{{ old('color_product_code', $cosmetic->color_product_code ?: (trim(collect([$cosmetic->color, $cosmetic->product_code])->filter()->implode(' / ')) ?: '')) }}" class="form-input" maxlength="50" placeholder="例: ピンクベージュ / #02">
-      @error('color_product_code')
-      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
-      @enderror
-    </div>
+    <x-ui.input label="カラー・品番" name="color_product_code" type="text" value="{{ old('color_product_code', $cosmetic->color_product_code ?: (trim(collect([$cosmetic->color, $cosmetic->product_code])->filter()->implode(' / ')) ?: '')) }}" maxlength="50" placeholder="例: ピンクベージュ / #02" />
 
     {{-- ブランド --}}
-    <div>
-      <label class="form-label">ブランド</label>
-      <input type="text" name="brand" value="{{ old('brand', $cosmetic->brand) }}" class="form-input">
-      @error('brand')
-      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
-      @enderror
-    </div>
+    <x-ui.input label="ブランド" name="brand" type="text" value="{{ old('brand', $cosmetic->brand) }}" />
 
     {{-- カテゴリ --}}
     <div>
@@ -80,14 +62,7 @@
     </div>
 
     {{-- 使用期限 --}}
-    <div>
-      <label class="form-label">使用期限</label>
-      <p class="mb-1 text-xs" style="color: color-mix(in oklab, var(--color-text) 60%, transparent)">目安・・・未開封：３年 / 開封後：６ヶ月～１年</p>
-      <input type="date" name="expiration_date" value="{{ old('expiration_date', $cosmetic->expiration_date) }}" class="form-input">
-      @error('expiration_date')
-      <p class="mt-1 text-red-600 text-sm">{{ $message }}</p>
-      @enderror
-    </div>
+    <x-ui.input label="使用期限" name="expiration_date" type="date" value="{{ old('expiration_date', $cosmetic->expiration_date) }}" hint="目安・・・未開封：３年 / 開封後：６ヶ月～１年" />
 
     {{-- メモ --}}
     <div>
