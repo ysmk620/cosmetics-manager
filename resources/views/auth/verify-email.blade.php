@@ -17,7 +17,7 @@
       <div class="flex items-center justify-between gap-3">
         <form method="POST" action="{{ route('verification.send') }}">
           @csrf
-          <x-ui.button variant="primary" type="submit">確認メールを再送</x-ui.button>
+          <button type="submit" class="btn btn-primary">確認メールを再送</button>
         </form>
         <form method="POST" action="{{ route('logout') }}">
           @csrf

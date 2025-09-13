@@ -18,7 +18,7 @@
 
         <x-ui.input label="メールアドレス" name="email" type="email" required autofocus />
 
-        <x-ui.button variant="primary" type="submit" class="w-full">再設定リンクを送信</x-ui.button>
+        <button type="submit" class="btn btn-primary w-full">再設定リンクを送信</button>
 
         <p class="text-center text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">
           <a href="{{ route('login') }}" class="underline">ログイン画面に戻る</a>
