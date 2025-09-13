@@ -13,7 +13,7 @@
 
         <x-ui.input label="パスワード" name="password" type="password" required autocomplete="current-password" />
 
-        <x-ui.button variant="primary" type="submit" class="w-full">確認する</x-ui.button>
+        <button type="submit" class="btn btn-primary w-full">確認する</button>
       </form>
     </div>
   </div>

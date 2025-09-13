@@ -74,7 +74,7 @@
 
 
     {{-- 送信ボタン --}}
-    <x-ui.button variant="primary" type="submit" class="w-full">登録する</x-ui.button>
+    <button type="submit" class="btn btn-primary w-full">登録する</button>
   </form>
 </div>
 @endsection

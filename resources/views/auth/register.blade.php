@@ -14,7 +14,7 @@
         <x-ui.input label="パスワード" name="password" type="password" required autocomplete="new-password" />
         <x-ui.input label="パスワード（確認）" name="password_confirmation" type="password" required autocomplete="new-password" />
 
-        <x-ui.button variant="primary" type="submit" class="w-full">登録する</x-ui.button>
+        <button type="submit" class="btn btn-primary w-full">登録する</button>
 
         <p class="text-center text-sm" style="color: color-mix(in oklab, var(--color-text) 70%, transparent)">
           すでに登録済みの方は

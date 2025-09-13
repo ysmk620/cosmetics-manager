@@ -47,9 +47,8 @@
 
         {{-- ボタン --}}
         <div class="flex gap-2 self-center">
-            <x-ui.button type="submit" variant="primary" class="w-full">検索</x-ui.button>
-            <x-ui.button as="a" variant="ghost" href="{{ route('cosmetics.index') }}"
-                class="w-full border border-[color:var(--color-line)]">クリア</x-ui.button>
+            <button type="submit" class="btn btn-primary w-full">検索</button>
+            <a href="{{ route('cosmetics.index') }}" class="btn btn-ghost w-full border border-[color:var(--color-line)]">クリア</a>
         </div>
     </form>
 

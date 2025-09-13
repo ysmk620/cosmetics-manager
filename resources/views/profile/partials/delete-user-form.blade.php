@@ -4,10 +4,10 @@
         <p class="mt-1 text-sm" style="color: color-mix(in oklab, var(--color-text) 75%, transparent)">この操作は取り消せません。データを事前にバックアップしてください。</p>
     </header>
 
-    <x-ui.button variant="secondary"
+    <button type="button" class="btn btn-secondary"
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >アカウントを削除</x-ui.button>
+    >アカウントを削除</button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6 space-y-4">
@@ -25,7 +25,7 @@
 
             <div class="flex justify-end gap-3">
                 <button type="button" class="btn btn-ghost" x-on:click="$dispatch('close')">キャンセル</button>
-                <x-ui.button class="ms-3" variant="primary">削除する</x-ui.button>
+                <button type="button" class="btn btn-primary ms-3">削除する</button>
             </div>
         </form>
     </x-modal>
