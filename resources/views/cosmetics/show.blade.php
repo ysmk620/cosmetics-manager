@@ -4,8 +4,12 @@
 <div class="max-w-2xl mx-auto space-y-6">
     <div class="flex items-center justify-between">
         <h2 class="text-3xl font-bold" style="color: var(--color-text)">アイテム詳細</h2>
-        <a href="{{ route('cosmetics.index') }}" class="btn btn-secondary">
-            ← 一覧に戻る
+        <a href="{{ route('cosmetics.index') }}" class="btn btn-secondary inline-flex items-center">
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <line x1="2.5" y1="12" x2="23.5" y2="12" stroke-width="1.5" />
+                <polyline points="10.14 4.36 2.5 12 10.14 19.64" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            一覧に戻る
         </a>
     </div>
 
