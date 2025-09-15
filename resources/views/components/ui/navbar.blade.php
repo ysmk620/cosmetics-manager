@@ -67,6 +67,10 @@
           <a href="{{ route('profile.edit') }}"
              class="block px-3 py-2 rounded-md transition hover:bg-black/5 {{ request()->routeIs('profile.edit') ? 'bg-black/10 font-medium' : '' }}"
              style="color: var(--color-text)" @if(request()->routeIs('profile.edit')) aria-current="page" @endif>アカウント</a>
+          <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="w-full text-left block px-3 py-2 rounded-md hover:bg-black/5 transition" style="color: var(--color-text)">ログアウト</button>
+          </form>
         </div>
       </div>
     @endauth
