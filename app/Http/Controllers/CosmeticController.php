@@ -31,7 +31,7 @@ class CosmeticController extends Controller
         $validated['user_id'] = auth()->id();
         Cosmetic::create($validated);
 
-        return redirect()->route('cosmetics.create')->with('success', 'アイテムを登録しました');
+        return redirect()->route('cosmetics.index')->with('success', 'アイテムを登録しました');
     }
 
     public function index(Request $request)
