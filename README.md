@@ -35,30 +35,36 @@
 
 ## スクリーンショット
 
+### トップページ
+<img src="screenshots/cosmemo-welcome.png" alt="トップページ" width="720">
+
+### アプリ概要
+<img src="screenshots/cosmemo-overview.png" alt="アプリ概要" width="720">
+
 ### メイン画面(ダッシュボード)
+<img src="screenshots/cosmemo-dashboard.png" alt="メイン画面(ダッシュボード)" width="720">
 
-_実装完了後に追加予定_
+### アイテム一覧画面
+<img src="screenshots/cosmemo-index.png" alt="アイテム一覧画面" width="720">
 
-### コスメ登録画面
+### アイテム詳細画面
+<img src="screenshots/cosmemo-show.png" alt="アイテム詳細画面" width="720">
 
-_MVP版(実装完了後に差し替え予定)_
+### アイテム登録画面
+<img src="screenshots/cosmemo-create.png" alt="アイテム登録画面" width="720">
 
-![コスメ登録画面](screenshots/register.png)
-
-### コスメ一覧画面
-
-_MVP版(実装完了後に差し替え予定)_
-
-![コスメ一覧画面](screenshots/list.png)
+### レスポンシブデザイン
+<img src="screenshots/cosmemo-responsive.png" alt="レスポンシブデザイン" width="720">
 
 
 ## 主要機能
+-   **ユーザー認証**: 個人データ保護とマルチユーザー対応
 -   **コスメCRUD**: 登録・閲覧・編集・削除の完全な管理機能
+-   **ダッシュボード**: 統計情報・期限アラート・使用状況の一覧表示
 -   **期限切れハイライト**: 使用期限が近い・過ぎたアイテムの視覚的警告
 -   **お気に入り機能**: よく使うコスメのブックマーク・専用表示
--   **ダッシュボード**: 統計情報・期限アラート・使用状況の一覧表示
 -   **検索・フィルタ**: 商品名・ブランド・カテゴリによる効率的な絞り込み
--   **ユーザー認証**: 個人データ保護とマルチユーザー対応
+
 
 ## 使用技術
 
@@ -83,7 +89,7 @@ _MVP版(実装完了後に差し替え予定)_
 
 ### ER図
 
-![データベースER図](screenshots/er-diagram.png)
+<img src="screenshots/er-diagram.png" alt="データベースER図" width="720">
 
 ## セットアップ
 
@@ -135,5 +141,3 @@ npm run dev
 1. ブラウザで `http://localhost:8000` にアクセス
 2. 「登録」から商品情報を登録
 3. 「一覧」で登録したコスメを確認
-
-
