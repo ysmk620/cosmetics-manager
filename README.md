@@ -103,7 +103,7 @@
 
 #### 1. リポジトリのクローンと移動
 ```bash
-git clone https://github.com/yourusername/cosmetics-manager
+git clone https://github.com/ysmk620/cosmetics-manager
 cd cosmetics-manager
 ```
 #### 2. 環境設定
