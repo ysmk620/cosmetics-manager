@@ -91,53 +91,50 @@
 
 <img src="screenshots/er-diagram.png" alt="データベースER図" width="720">
 
-## セットアップ
+## セットアップ手順
 
-### 必要な環境
-- Docker Desktop
-- PHP 8.2+ (ローカル開発の場合)
-- Composer
-- Node.js & npm
+### 必要環境
+- Docker および Docker Compose
+- （Windows）WSL2 + Ubuntu 推奨
+- PHP 8.2以上（ローカル実行時）
+- Composer（ローカル実行時）
 
-### インストール手順
+### インストール方法
 
-1. **リポジトリのクローン**
+#### 1. リポジトリのクローンと移動
 ```bash
-git clone [repository-url]
-cd mvp-app
+git clone https://github.com/yourusername/cosmetics-manager
+cd cosmetics-manager
 ```
-
-2. **依存関係のインストール**
-```bash
-composer install
-npm install
-```
-
-3. **環境設定**
+#### 2. 環境設定
 ```bash
 cp .env.example .env
-php artisan key:generate
 ```
-
-4. **データベースの初期化**
+#### 3. Composer 依存関係をインストール
 ```bash
-php artisan migrate
-php artisan db:seed
+./vendor/bin/sail composer install
 ```
-
-5. **開発サーバーの起動**
+#### 4. Docker環境の起動
 ```bash
-composer run dev
+./vendor/bin/sail up -d
 ```
-
-または個別に実行:
+#### 5. アプリ初期化
 ```bash
-php artisan serve
-npm run dev
+./vendor/bin/sail artisan key:generate
 ```
-
+#### 6. アプリ初期化データベース準備
+```bash
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed --class=CategorySeeder
+#カテゴリ選択にはカテゴリデータが必要です。上記の CategorySeeder 実行でプルダウンが表示されます。
+```
+#### 7. フロントエンド依存関係
+```bash
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+```
 ## 使用方法
 
-1. ブラウザで `http://localhost:8000` にアクセス
-2. 「登録」から商品情報を登録
-3. 「一覧」で登録したコスメを確認
+- ブラウザで [http://localhost] にアクセス（Sail 利用時）。
+- 新規ユーザー登録後、Mailpit [http://localhost:8025] に届いた認証メールのリンクをクリックしてメール認証を完了してください。
+- 認証後、アイテム登録・一覧・編集などの機能を利用できます。
