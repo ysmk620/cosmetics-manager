@@ -112,7 +112,7 @@ cp .env.example .env
 ```
 #### 3. Composer 依存関係をインストール
 ```bash
-./vendor/bin/sail composer install
+composer install
 ```
 #### 4. Docker環境の起動
 ```bash
