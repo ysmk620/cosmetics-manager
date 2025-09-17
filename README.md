@@ -121,6 +121,7 @@ cp .env.example .env
 #### 5. アプリ初期化
 ```bash
 ./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan storage:link
 ```
 #### 6. アプリ初期化データベース準備
 ```bash
