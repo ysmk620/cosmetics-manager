@@ -123,7 +123,7 @@ cp .env.example .env
 ./vendor/bin/sail artisan key:generate
 ./vendor/bin/sail artisan storage:link
 ```
-#### 6. アプリ初期化データベース準備
+#### 6. データベース準備
 ```bash
 ./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan db:seed --class=CategorySeeder
