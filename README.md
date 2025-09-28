@@ -1,6 +1,6 @@
 # CosMemo
 
-**URL:** https://cosmemo.fly.dev/
+**URL:** https://cosmemo.fly.dev
 
 **「コスメの整理整頓を楽しく、効率的に」**
 
