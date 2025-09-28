@@ -13,12 +13,38 @@ console_command = 'php /var/www/html/artisan tinker'
     PHP_VERSION = '8.2'
 
 [env]
+  # App
   APP_ENV = 'production'
+  APP_URL = 'https://cosmemo.fly.dev'
+  ASSET_URL = 'https://cosmemo.fly.dev'
+
+  # Locale
+  APP_LOCALE = 'ja'
+  APP_FALLBACK_LOCALE = 'ja'
+  APP_FAKER_LOCALE = 'ja_JP'
+
+  # Database
+  DB_CONNECTION = 'pgsql'
+
+  # Session
+  SESSION_DRIVER = 'cookie'
+  SESSION_SECURE_COOKIE = 'true'
+
+  # Cache / Queue
+  CACHE_STORE = 'file'
+  QUEUE_CONNECTION = 'sync'
+
+  # Mail
+  MAIL_MAILER = 'smtp'
+  MAIL_HOST = 'smtp.gmail.com'
+  MAIL_PORT = '587'
+  MAIL_ENCRYPTION = 'tls'
+  MAIL_FROM_NAME = 'CosMemo'
+
+  # Logging
   LOG_CHANNEL = 'stderr'
   LOG_LEVEL = 'info'
   LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
-  SESSION_DRIVER = 'cookie'
-  SESSION_SECURE_COOKIE = 'true'
 
 [http_service]
   internal_port = 8080
