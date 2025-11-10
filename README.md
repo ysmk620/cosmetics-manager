@@ -1,6 +1,6 @@
 # CosMemo
 
-**URL:** https://cosmemo.fly.dev
+
 
 **「コスメの整理整頓を楽しく、効率的に」**
 
@@ -88,13 +88,51 @@
 
 
 
-## はじめかた
+## セットアップ手順
 
--   https://cosmemo.fly.dev/ にアクセス
--   「新規登録」からアカウントを作成
--   届いたメールの「メールアドレス確認」をクリック
--   ログインして利用開始
+### 必要環境
+- Docker および Docker Compose
+- （Windows）WSL2 + Ubuntu 推奨
+- PHP 8.2以上（ローカル実行時）
+- Composer（ローカル実行時）
 
-メールが届かない場合は迷惑メールフォルダをご確認ください。
+### インストール方法
 
+#### 1. リポジトリのクローンと移動
+```bash
+git clone https://github.com/ysmk620/cosmetics-manager
+cd cosmetics-manager
+```
+#### 2. 環境設定
+```bash
+cp .env.example .env
+```
+#### 3. Composer 依存関係をインストール
+```bash
+composer install
+```
+#### 4. Docker環境の起動
+```bash
+./vendor/bin/sail up -d
+```
+#### 5. アプリ初期化
+```bash
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan storage:link
+```
+#### 6. データベース準備
+```bash
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed --class=CategorySeeder
+#カテゴリ選択にはカテゴリデータが必要です。上記の CategorySeeder 実行でプルダウンが表示されます。
+```
+#### 7. フロントエンド依存関係
+```bash
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+```
+## 使用方法
 
+- ブラウザで [http://localhost] にアクセス（Sail 利用時）。
+- 新規ユーザー登録後、Mailpit [http://localhost:8025] に届いた認証メールのリンクをクリックしてメール認証を完了してください。
+- 認証後、アイテム登録・一覧・編集などの機能を利用できます。
